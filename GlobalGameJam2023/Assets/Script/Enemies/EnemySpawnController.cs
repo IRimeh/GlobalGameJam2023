@@ -7,6 +7,10 @@ public class EnemySpawnController : MonoBehaviour
     static EnemySpawnController I;
 
     [SerializeField]
+    AnimationCurve SpawnIntervalCurve;
+    static public float SpawnRate { get { return I.SpawnIntervalCurve.Evaluate(Time.timeSinceLevelLoad); } }
+
+    [SerializeField]
     Transform DummyHolder;
     [SerializeField]
     EnemySpawn[] enemySpawners;

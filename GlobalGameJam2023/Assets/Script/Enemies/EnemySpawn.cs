@@ -32,7 +32,7 @@ public class EnemySpawn : MonoBehaviour
         {
             Spawn();
             yield return new WaitForSeconds(offset);
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(EnemySpawnController.SpawnRate);
         }
     }
 
