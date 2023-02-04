@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct EnemyInfo
 {
     public bool isActive;
@@ -16,6 +17,7 @@ public enum TargetEnum { FollowPlayer, TargetPlant }
 
 public class EnemySpawn : MonoBehaviour
 {
+    [SerializeField]
     EnemyInfo currentSpawningEnemy;
     public float offset = 0f;
 

@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 28f6e2330a8e9a34eac34e24748c0bca, type: 2}
 --- !u!1 &43401031
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &43401032
 MeshCollider:
@@ -321,7 +321,7 @@ MonoBehaviour:
   CameraPrefab: {fileID: 3006958691987082441, guid: db07a498a47b6be44996f5721eeea531,
     type: 3}
   EnemyController: {fileID: 391963821}
-  PlayerSpawnPos: {x: 0, y: 1, z: -5}
+  PlayerSpawnPos: {x: 0, y: 0, z: -5}
 --- !u!4 &391963820
 Transform:
   m_ObjectHideFlags: 0
@@ -814,46 +814,6 @@ PrefabInstance:
     - target: {fileID: 4615155102339271674, guid: 3620040ab1ef99f4a82c11797fa8c291,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102396738870, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102410548978, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102472865016, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102683837557, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102693750662, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155102945694327, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155103251130576, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615155103300339250, guid: 3620040ab1ef99f4a82c11797fa8c291,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
     [SerializeField]
-    private LayerMask layerMask;
+    private int collisionLayer = 7;
 
     private float projectileDamage;
     private float projectileSpeed;
@@ -35,9 +35,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.GetMask("Enemies"))
+        if(other.gameObject.layer == collisionLayer && other.TryGetComponent<Health>(out Health health))
         {
-            DealDamage();
+            DealDamage(health);
 
             if(penetrationsLeft < 1)
                 DestroyProjectile();
@@ -46,9 +46,10 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void DealDamage()
+    protected virtual void DealDamage(Health health)
     {
         // Deal damage to enemy
+        health.TakeDamage(projectileDamage);
     }
 
     private IEnumerator LifeTimeCoroutine(float lifeTime)

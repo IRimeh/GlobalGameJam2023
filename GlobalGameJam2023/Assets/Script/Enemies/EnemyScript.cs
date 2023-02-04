@@ -7,6 +7,8 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField]
+    private Health health;
     public EnemyInfo enemyInfo;
     public SpriteRenderer spriteRenderer;
     public NavMeshAgent agent;
@@ -15,7 +17,7 @@ public class EnemyScript : MonoBehaviour
     
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -26,10 +28,12 @@ public class EnemyScript : MonoBehaviour
         enemyInfo.isActive = true;
         if (enemyInfo.sprite) { SetSprite(enemyInfo.sprite); } else { Debug.Log("HEY WTF"); }
         SetTarget(enemyInfo.target);
+        health.Init(info.health);
     }
 
     public void SetInactive()
-    {//if Die
+    {
+        //if Die
         gameObject.SetActive(false);
         enemyInfo.isActive = false;
         StopAllCoroutines();
