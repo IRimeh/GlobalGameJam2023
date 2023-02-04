@@ -57,9 +57,9 @@ public class EnemyScript : MonoBehaviour
     {
         while (true)
         {
-            agent.velocity = (Vector3.zero - transform.position).normalized * agent.speed;
+            agent.velocity = (PlayerController.Position - transform.position).normalized * agent.speed;
 
-            yield return new WaitForSeconds(0.1f);
+            yield return null;//yield return new WaitForSeconds(0.1f);
         }
     }
     private IEnumerator PlantTargetingAIBehaviour()
