@@ -51,9 +51,4 @@ public class EnemySpawnController : MonoBehaviour
         Debug.LogWarning("Running out of Dummies");
         return enemy;
     }
-
-    private void Update()
-    {
-        Shader.SetGlobalFloat("_GameTime", Time.time);
-    }
 }

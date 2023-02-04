@@ -34,4 +34,9 @@ public class GameController : MonoBehaviour
 
         EnemyController.StartGame();
     }
+
+    private void Update()
+    {
+        Shader.SetGlobalFloat("_GameTime", Time.time);
+    }
 }

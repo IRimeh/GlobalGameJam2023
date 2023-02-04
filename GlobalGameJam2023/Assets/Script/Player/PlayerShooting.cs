@@ -48,7 +48,8 @@ public class PlayerShooting : MonoBehaviour
             float angleOffset = angleInBetweenProjectiles * i;
             Vector3 direction = Quaternion.Euler(0, -halfTotalAngle + angleOffset, 0) * PlayerController.AimDirection;
 
-            GameObject projectileObj = Instantiate(projectilePrefab, transform.position + PlayerController.AimDirection, Quaternion.LookRotation(direction, Vector3.up), projectileParentTransform);
+            Vector3 offset = PlayerController.AimDirection + new Vector3(0, 1, 0);
+            GameObject projectileObj = Instantiate(projectilePrefab, transform.position + offset, Quaternion.LookRotation(direction, Vector3.up), projectileParentTransform);
             Projectile projectile = projectileObj.GetComponent<Projectile>();
             projectile.InitProjectile(playerStats.Damage, playerStats.ProjectileSpeed, direction, playerStats.ProjectilePenetration, playerStats.ProjectileSize);
         }

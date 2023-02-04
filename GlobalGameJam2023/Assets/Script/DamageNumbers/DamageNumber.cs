@@ -12,6 +12,10 @@ public class DamageNumber : MonoBehaviour
     [SerializeField]
     private Gradient colorGradient;
     [SerializeField]
+    private AnimationCurve fontScale;
+    [SerializeField]
+    private float baseFontScale = 12.0f;
+    [SerializeField]
     private Vector3 offset = new Vector3(0, 1.0f, 0);
 
     private Vector3 position;
@@ -31,8 +35,10 @@ public class DamageNumber : MonoBehaviour
     {
         while(currentLifeTime > 0)
         {
+            float ratio = 1.0f - (currentLifeTime / damageNumberLifeTime);
             currentLifeTime -= Time.deltaTime;
-            damageNumber.color = colorGradient.Evaluate(1.0f - (currentLifeTime / damageNumberLifeTime));
+            damageNumber.color = colorGradient.Evaluate(ratio);
+            damageNumber.fontSize = baseFontScale * fontScale.Evaluate(ratio);
             transform.position = Camera.main.WorldToScreenPoint(position);
             
             yield return null;
