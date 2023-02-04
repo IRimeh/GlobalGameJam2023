@@ -18,4 +18,20 @@ public class BloodInventory : MonoBehaviour
         BloodAmount = 0;
         return amount;
     }
+
+    public float TakeBlood(float amount)
+    {
+        if(BloodAmount > amount)
+        {
+            BloodAmount -= amount;
+            return amount;
+        }
+        else
+            return TakeBlood();
+    }
+
+    public float GetBloodAmount()
+    {
+        return BloodAmount;
+    }
 }

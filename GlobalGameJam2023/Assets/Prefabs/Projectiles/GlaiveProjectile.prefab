@@ -116,8 +116,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.05
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -169,8 +169,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.1
+      scalar: 5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -661,14 +661,14 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 10
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -748,7 +748,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -4847,8 +4847,8 @@ Transform:
   m_GameObject: {fileID: 1214644834}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5285768301066795456}
   m_RootOrder: 0
@@ -4894,7 +4894,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: da38b312f11dbc54cb714fe90483f1df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d11b1ec430ec0641a67cbd78f8f94d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4916,9 +4916,9 @@ GameObject:
   - component: {fileID: 5285768301066795456}
   - component: {fileID: 5285768301066795461}
   - component: {fileID: 311702901}
-  - component: {fileID: 2580001436264295316}
+  - component: {fileID: 5142962924339887094}
   m_Layer: 0
-  m_Name: DefaultProjectile
+  m_Name: GlaiveProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4952,7 +4952,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &311702901
 Rigidbody:
@@ -4970,7 +4970,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
---- !u!114 &2580001436264295316
+--- !u!114 &5142962924339887094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4979,8 +4979,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5285768301066795460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17e160a417a8447bee19c6ccb3b04f, type: 3}
+  m_Script: {fileID: 11500000, guid: e56e0dbd9290bdc49a1656fa4cd87113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 311702901}
   collisionLayer: 7
+  spriteObj: {fileID: 1214644834}
+  spinningSpeed: 720
+  comeBackAfterSeconds: 0.5
+  turnSpeed: 24

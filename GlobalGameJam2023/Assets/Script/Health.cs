@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float MaxHealth = 20;
+    public GameObject DeathParticlesPrefab;
     public bool ShowDamageNumber = false;
+    public bool SpawnDeathParticles = true;
     public UnityEvent<float, float> OnTakeDamage;
     public UnityEvent OnDeath;
 
@@ -52,6 +54,10 @@ public class Health : MonoBehaviour
     private void Die()
     {
         OnDeath.Invoke();
+
+        if(SpawnDeathParticles)
+            Instantiate(DeathParticlesPrefab, transform.position, Quaternion.identity);
+
         this.enabled = false;
     }
 }

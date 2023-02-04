@@ -5,20 +5,20 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody rb;
+    protected Rigidbody rb;
     [SerializeField]
-    private int collisionLayer = 7;
+    protected int collisionLayer = 7;
 
-    private float projectileDamage;
-    private float projectileSpeed;
-    private Vector3 projectileDirection;
-    private int projectilePenetration;
-    private float projectileSize;
+    protected float projectileDamage;
+    protected float projectileSpeed;
+    protected Vector3 projectileDirection;
+    protected int projectilePenetration;
+    protected float projectileSize;
 
-    private int penetrationsLeft = 0;
-    private Coroutine lifeTimeCoroutine = null;
+    protected int penetrationsLeft = 0;
+    protected Coroutine lifeTimeCoroutine = null;
 
-    public void InitProjectile(float damage, float speed, Vector3 direction, int penetration, float size, float lifeTime = 10.0f)
+    public virtual void InitProjectile(float damage, float speed, Vector3 direction, int penetration, float size, float lifeTime = 10.0f)
     {
         projectileDamage = damage;
         projectileSpeed = speed;

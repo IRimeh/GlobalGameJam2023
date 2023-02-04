@@ -15,6 +15,18 @@ public class GameController : MonoBehaviour
     private GameObject playerCamera;
     private PlayerController playerController;
     private CameraController cameraController;
+
+    public static GameController Instance;
+    private bool settingTimeScale = false;
+    private float timeScaleToSetTo = 0.0f;
+    private float timeInSeconds = 0.0f;
+    private float timeScaleBefore = 0.0f;
+    private float timeElapsed = 0.0f;
+
+    void Awake()
+    {
+        Instance = this;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -38,5 +50,38 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         Shader.SetGlobalFloat("_GameTime", Time.time);
+        SettingTime();
+    }
+
+    private void SettingTime()
+    {
+        if(settingTimeScale)
+        {
+            if(timeElapsed < timeInSeconds)
+            {
+                timeElapsed += Time.unscaledDeltaTime;
+                float ratio = timeElapsed / timeInSeconds;
+                Time.timeScale = Mathf.Lerp(timeScaleBefore, timeScaleToSetTo, ratio);
+            }
+            else
+            {
+                Time.timeScale = timeScaleToSetTo;
+                timeElapsed = 0.0f;
+                settingTimeScale = false;
+            }
+        }
+    }
+
+
+    public static void SetTimeScale(float _timeScaleToSetTo, float _timeInSeconds)
+    {
+        if(Instance.timeScaleToSetTo == _timeScaleToSetTo)
+            return;
+
+        Instance.settingTimeScale = true;
+        Instance.timeScaleToSetTo = _timeScaleToSetTo;
+        Instance.timeInSeconds = _timeInSeconds;
+        Instance.timeElapsed = 0.0f;
+        Instance.timeScaleBefore = Time.timeScale;
     }
 }

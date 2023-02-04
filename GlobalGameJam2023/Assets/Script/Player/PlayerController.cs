@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
     [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
     private Transform rotateToCameraTransform;
     [SerializeField]
     private float acceleration = 5.0f;
@@ -16,12 +18,18 @@ public class PlayerController : MonoBehaviour
     private float deceleration = 5.0f;
     [SerializeField]
     private LayerMask mouseColliderLayermask;
+
+    [SerializeField]
+    private Material idleMaterial, walkMaterial;
+    [SerializeField]
+    private Sprite idleSprite, walkSprite;
     
     private bool hasCamera = false;
     private Camera playerCamera;
 
     public static Vector3 Position = Vector3.zero;
     public static Vector3 AimDirection = Vector3.zero;
+    private bool flipSprite = false;
 
     public void AssignCamera(Camera camera)
     {
@@ -35,6 +43,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         RotateTowardsCursor();
         Position = transform.position;
+        Animations();
     }
 
     private void Movement()
@@ -68,7 +77,30 @@ public class PlayerController : MonoBehaviour
         return direction;
     }
 
+    private void Animations()
+    {
+        if(IsPressingMovementInput() && GetInputDirection() != Vector3.zero) 
+        {
+            spriteRenderer.sprite = walkSprite;
+            spriteRenderer.material = walkMaterial;
 
+            if(Input.GetKey(KeyCode.A))
+            {
+                flipSprite = false;
+            }
+            if(Input.GetKey(KeyCode.D))
+            {
+                flipSprite = true;
+            }
+
+            spriteRenderer.flipX = flipSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = idleSprite;
+            spriteRenderer.material = idleMaterial;
+        }
+    }
 
     private void RotateTowardsCursor()
     {
