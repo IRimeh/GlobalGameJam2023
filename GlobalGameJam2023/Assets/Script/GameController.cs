@@ -7,11 +7,9 @@ public class GameController : MonoBehaviour
     [Header("Game Setup")]
     public GameObject PlayerPrefab;
     public GameObject CameraPrefab;
-<<<<<<< HEAD
     public EnemySpawnController EnemyController;
-=======
     public Vector3 PlayerSpawnPos = new Vector3(-2, 1.5f, 0);
->>>>>>> b5bb58de2fa713e0bcc818f19e4749284c893602
+
 
     private GameObject player;
     private GameObject playerCamera;
@@ -26,6 +24,7 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
+        player = Instantiate(PlayerPrefab, PlayerSpawnPos, Quaternion.identity);
         playerCamera = Instantiate(CameraPrefab);
         playerController = player.GetComponent<PlayerController>();
         cameraController = playerCamera.GetComponent<CameraController>();

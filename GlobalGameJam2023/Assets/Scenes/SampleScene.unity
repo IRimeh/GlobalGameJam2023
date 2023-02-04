@@ -264,6 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 391963820}
   - component: {fileID: 391963819}
+  - component: {fileID: 391963821}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -287,6 +288,7 @@ MonoBehaviour:
     type: 3}
   CameraPrefab: {fileID: 3006958691987082441, guid: db07a498a47b6be44996f5721eeea531,
     type: 3}
+  EnemyController: {fileID: 391963821}
   PlayerSpawnPos: {x: 0, y: 1, z: -5}
 --- !u!4 &391963820
 Transform:
@@ -303,6 +305,20 @@ Transform:
   m_Father: {fileID: 380184611}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &391963821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391963818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bac720500eaaae4daa522523b6ecc45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DummyHolder: {fileID: 0}
+  enemySpawners: []
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
