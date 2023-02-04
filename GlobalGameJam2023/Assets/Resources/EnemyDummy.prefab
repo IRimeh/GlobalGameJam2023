@@ -40,8 +40,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880873410592673011}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -191,7 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 20
+  DeathParticlesPrefab: {fileID: 6560871779171395271, guid: 59e0e1488d8414b4cb493e0f47cbf91a,
+    type: 3}
   ShowDamageNumber: 1
+  SpawnDeathParticles: 1
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
