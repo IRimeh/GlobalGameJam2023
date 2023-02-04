@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour
 {
     [SerializeField]
     private Health health;
+    [SerializeField]
+    private GameObject pickupPrefab;
     public EnemyInfo enemyInfo;
     public SpriteRenderer spriteRenderer;
     public NavMeshAgent agent;
@@ -96,5 +98,10 @@ public class EnemyScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void DropPickup()
+    {
+        Instantiate(pickupPrefab, transform.position, Quaternion.identity);
     }
 }

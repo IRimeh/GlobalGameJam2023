@@ -43,7 +43,6 @@ public class Health : MonoBehaviour
         // Flash red
         if(spriteRenderer != null)
         {
-            Debug.Log("yes");
             spriteRenderer.GetPropertyBlock(propBlock);
             propBlock.SetFloat("_TakeDamageTime", Time.time);
             spriteRenderer.SetPropertyBlock(propBlock);
