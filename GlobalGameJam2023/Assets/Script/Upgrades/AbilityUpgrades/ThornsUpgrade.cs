@@ -18,36 +18,28 @@ public class ThronsUpgrade : AbilityUpgrade
 
     public override void ChooseUpgrade()
     {
-        Debug.Log("is unlocked:" + playerStats.DashStats.IsAbilityUnlocked());
-        Debug.Log(playerStats.DashStats.Distance);
-        Debug.Log(playerStats.DashStats.Cooldown);
-        Debug.Log(playerStats.DashStats.Charges);
-
         base.ChooseUpgrade();
-        playerStats.DashStats.UpgradeLevel = UpgradeLevel;
+        playerStats.ThronsStats.UpgradeLevel = UpgradeLevel;
 
         switch(UpgradeLevel)
         {
             case 2:
-                playerStats.DashStats.Distance = playerStats.DashStats.BaseDistance * 1.5f;
+                playerStats.ThronsStats.Damage = playerStats.ThronsStats.BaseDamage * 1.25f;
                 break;
             case 3:
-                playerStats.DashStats.Cooldown = playerStats.DashStats.BaseCooldown - 2.0f;
+                playerStats.ThronsStats.Damage = playerStats.ThronsStats.BaseDamage * 1.5f;
                 break;
             case 4:
-                playerStats.DashStats.Cooldown = playerStats.DashStats.BaseCooldown - 4.0f;
+                playerStats.ThronsStats.ShootingDirections = playerStats.ThronsStats.BaseShootingDirections + 1;
                 break;
             case 5:
-                playerStats.DashStats.Distance = playerStats.DashStats.BaseDistance * 2.0f;
+                playerStats.ThronsStats.Cooldown = playerStats.ThronsStats.BaseCooldown - 2.0f;
                 break;
             case 6:
-                playerStats.DashStats.Charges = 2;
+                playerStats.ThronsStats.Damage = playerStats.ThronsStats.BaseDamage * 2.0f;
+                playerStats.ThronsStats.Cooldown = playerStats.ThronsStats.BaseCooldown - 5.0f;
+                playerStats.ThronsStats.ShootingDirections = playerStats.ThronsStats.BaseShootingDirections + 3;
                 break;
         }
-
-        Debug.Log("is unlocked:" + playerStats.DashStats.IsAbilityUnlocked());
-        Debug.Log(playerStats.DashStats.Distance);
-        Debug.Log(playerStats.DashStats.Cooldown);
-        Debug.Log(playerStats.DashStats.Charges);
     }
 }

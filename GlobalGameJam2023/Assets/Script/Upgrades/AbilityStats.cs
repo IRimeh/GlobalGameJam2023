@@ -80,7 +80,7 @@ public class GlaiveStats : AbilityStats
     public float BaseDamage{ get { return baseDamage; } }
 
     [SerializeField] private float baseSpeed;
-    public float BaseSpeed{ get { return BaseSpeed; } }
+    public float BaseSpeed{ get { return baseSpeed; } }
 
     [SerializeField] private float baseSize;
     public float BaseSize{ get { return baseSize; } }

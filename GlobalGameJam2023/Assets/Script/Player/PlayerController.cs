@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
     private Rigidbody rb;
     [SerializeField]
     private Transform rotateToCameraTransform;
-    [SerializeField]
-    private float baseMovementSpeed = 5.0f;
     [SerializeField]
     private float acceleration = 5.0f;
     [SerializeField]
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Camera playerCamera;
 
     public static Vector3 Position = Vector3.zero;
+    public static Vector3 AimDirection = Vector3.zero;
 
     public void AssignCamera(Camera camera)
     {
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
         float lerpSpeed = isPressingMovementInput ? acceleration : deceleration;
 
         Vector3 dir = GetInputDirection();
-        rb.velocity = Vector3.Lerp(rb.velocity, dir * baseMovementSpeed, Time.deltaTime * lerpSpeed);
+        rb.velocity = Vector3.Lerp(rb.velocity, dir * playerStats.MovementSpeed, Time.deltaTime * lerpSpeed);
     }
 
     private bool IsPressingMovementInput()
@@ -69,8 +70,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
     private void RotateTowardsCursor()
     {
         if(!hasCamera)
@@ -82,6 +81,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pointToRotateTowards = hit.point;
             rotateToCameraTransform.LookAt(pointToRotateTowards, Vector3.up);
             rotateToCameraTransform.transform.rotation = Quaternion.Euler(0, rotateToCameraTransform.transform.rotation.eulerAngles.y, 0);
+            AimDirection = rotateToCameraTransform.transform.forward;
         }
     }
 }

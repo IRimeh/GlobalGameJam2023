@@ -39,6 +39,8 @@ public class PlayerStats : MonoBehaviour
     [Space(10)]
     [SerializeReference][ReadOnly]
     private List<AbilityUpgrade> abilityUpgrades = new List<AbilityUpgrade>();
+
+    private List<Upgrade> allUpgrades;
     
 
     private void Start()
@@ -62,8 +64,15 @@ public class PlayerStats : MonoBehaviour
 
         abilityUpgrades = new List<AbilityUpgrade>()
         {
-            new DashUpgrade(this)
+            new DashUpgrade(this),
+            new ThronsUpgrade(this),
+            new GlaiveUpgrade(this),
+            new ClusterBombUpgrade(this)
         };
+
+        allUpgrades = new List<Upgrade>();
+        playerUpgrades.ForEach(u => allUpgrades.Add(u));
+        abilityUpgrades.ForEach(u => allUpgrades.Add(u));
 
         Damage = baseDamage;
         Health = baseHealth;
@@ -85,15 +94,22 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float ProjectileSize;
     [HideInInspector] public int ProjectilePenetration;
 
-    [Button()]
-    private void TestButton()
+    public List<Upgrade> GetAllUpgrades()
     {
-        abilityUpgrades[abilityUpgrades.Count - 1].ChooseUpgrade();
+        return allUpgrades;
     }
 
-    // // Ability Upgrades
-    // [Foldout("Ability Upgrades")][SerializeField][ReadOnly] private int dash;
-    // [Foldout("Ability Upgrades")][SerializeField][ReadOnly] private int thorns;
-    // [Foldout("Ability Upgrades")][SerializeField][ReadOnly] private int glaive;
-    // [Foldout("Ability Upgrades")][SerializeField][ReadOnly] private int clusterBomb;
+    [Button("Random Upgrade")]
+    private void TestButton()
+    {
+        List<Upgrade> upgrades = GetAllUpgrades();
+        int randIndex = UnityEngine.Random.Range(0, upgrades.Count);
+        Upgrade upgrade = upgrades[randIndex];
+
+        Debug.Log(upgrade.UpgradeName + " - " + upgrade.UpgradeDescription);
+        upgrade.ChooseUpgrade();
+        Debug.Log("Upgrade Level:" + upgrade.UpgradeLevel);
+
+        //abilityUpgrades[0].ChooseUpgrade();
+    }
 }

@@ -109,9 +109,11 @@ GameObject:
   - component: {fileID: 6819490991858608088}
   - component: {fileID: 6819490991858608091}
   - component: {fileID: 6819490991858608090}
-  - component: {fileID: 472764164856449728}
   - component: {fileID: 1269353837054241322}
   - component: {fileID: 3385104699395917322}
+  - component: {fileID: 472764164856449728}
+  - component: {fileID: 8723279643669504880}
+  - component: {fileID: -6642717049490071084}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -198,26 +200,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &472764164856449728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819490991858608093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be84280921d7624a81bd6276d4a5892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1269353837054241322}
-  rotateToCameraTransform: {fileID: 2182415949803043346}
-  baseMovementSpeed: 15
-  acceleration: 12.5
-  deceleration: 15
-  mouseColliderLayermask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!54 &1269353837054241322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -248,9 +230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 10
   baseHealth: 100
-  baseFireRate: 0.3
-  baseMovementSpeed: 15
-  baseProjectileSpeed: 10
+  baseFireRate: 2
+  baseMovementSpeed: 10
+  baseProjectileSpeed: 25
   baseProjectileAmount: 1
   baseProjectileSize: 1
   baseProjectilePenetration: 0
@@ -272,17 +254,17 @@ MonoBehaviour:
     ShootingDirections: 0
   GlaiveStats:
     UpgradeLevel: 0
-    baseDamage: 0
-    baseSpeed: 0
-    baseSize: 0
+    baseDamage: 20
+    baseSpeed: 10
+    baseSize: 1
     Damage: 0
     Speed: 0
     Size: 0
   ClusterBombStats:
     UpgradeLevel: 0
-    baseDamage: 0
-    baseBombAmount: 0
-    baseSize: 0
+    baseDamage: 10
+    baseBombAmount: 3
+    baseSize: 1
     Damage: 0
     BombAmount: 0
     Size: 0
@@ -299,6 +281,59 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &472764164856449728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819490991858608093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be84280921d7624a81bd6276d4a5892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 3385104699395917322}
+  rb: {fileID: 1269353837054241322}
+  rotateToCameraTransform: {fileID: 2182415949803043346}
+  acceleration: 12.5
+  deceleration: 15
+  mouseColliderLayermask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &8723279643669504880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819490991858608093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd7093e4f01c784f8ae7f2fc8ec7806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 3385104699395917322}
+  rb: {fileID: 1269353837054241322}
+  dashForce: 750
+  dashTimer: 3.4028235e+38
+  currentCharges: 1
+--- !u!114 &-6642717049490071084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819490991858608093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a1c25568046bb4a911c046037d0e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 3385104699395917322}
+  projectilePrefab: {fileID: 5285768301066795460, guid: e3a8757ca0c50a4478099a4c2803c5c2,
+    type: 3}
+  angleInBetweenProjectiles: 10
 --- !u!1 &8843271936141307235
 GameObject:
   m_ObjectHideFlags: 0
