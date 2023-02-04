@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     [Header("Game Setup")]
     public GameObject PlayerPrefab;
     public GameObject CameraPrefab;
+    public EnemySpawnController EnemyController;
 
     private GameObject player;
     private GameObject playerCamera;
@@ -25,5 +26,7 @@ public class GameController : MonoBehaviour
         cameraController = playerCamera.GetComponent<CameraController>();
 
         cameraController.StartFollowing(player);
+
+        EnemyController.StartGame();
     }
 }
