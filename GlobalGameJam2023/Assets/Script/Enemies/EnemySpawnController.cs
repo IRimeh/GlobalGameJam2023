@@ -8,7 +8,10 @@ public class EnemySpawnController : MonoBehaviour
 
     [SerializeField]
     AnimationCurve SpawnIntervalCurve;
-    static public float SpawnRate { get { return I.SpawnIntervalCurve.Evaluate(Time.timeSinceLevelLoad); } }
+    static public float SpawnRate { get { return I.SpawnIntervalCurve.Evaluate(I.upgradeAmount); } }
+    static public void Upgrade() { I.upgradeAmount++; }
+    [SerializeField]
+    float upgradeAmount = 0;
 
     [SerializeField]
     Transform DummyHolder;
@@ -18,10 +21,32 @@ public class EnemySpawnController : MonoBehaviour
 
     List<EnemyScript> enemies = new List<EnemyScript>();
 
+    [SerializeField]
+    EnemyInfo WaveInfo1, WaveInfo2;
+
     private void Awake()
     {
         I = this;
         dummyObject = Resources.Load<GameObject>("EnemyDummy");
+        StartCoroutine(nameof(Wave2));
+        StartCoroutine(nameof(Wave3));
+        StartCoroutine(nameof(Wave4));
+    }
+
+    IEnumerator Wave2()
+    {
+        yield return new WaitUntil(() => upgradeAmount >= 20);
+        SetEnemyType(WaveInfo2);
+    }
+    IEnumerator Wave3()
+    {
+        yield return new WaitUntil(() => upgradeAmount >= 30);
+        SetEnemyType(WaveInfo1);
+    }
+    IEnumerator Wave4()
+    {
+        yield return new WaitUntil(() => upgradeAmount >= 50);
+        SetEnemyType(WaveInfo2);
     }
 
     public void StartGame()
@@ -39,6 +64,14 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
 
+    void SetEnemyType(EnemyInfo info)
+    {
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            enemySpawners[i].SetEnemyType(info);
+        }
+    }
+
     public static EnemyScript GetEnemyDummy()
     {
         return I.GetEnemyDummyInternal();
@@ -50,9 +83,9 @@ public class EnemySpawnController : MonoBehaviour
         {
             if (!enemies[i].enemyInfo.isActive) return enemies[i];
         }
-        EnemyScript enemy = Instantiate(dummyObject, DummyHolder).GetComponent<EnemyScript>();
-        enemies.Add(enemy);
+        //EnemyScript enemy = Instantiate(dummyObject, DummyHolder).GetComponent<EnemyScript>();
+        //enemies.Add(enemy);
         Debug.LogWarning("Running out of Dummies");
-        return enemy;
+        return enemies[enemies.Count];
     }
 }

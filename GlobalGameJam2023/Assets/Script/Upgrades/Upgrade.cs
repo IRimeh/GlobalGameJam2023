@@ -33,7 +33,10 @@ public class Upgrade
     public virtual void ChooseUpgrade()
     {
         if(CanBeUpgraded())
+        {
             UpgradeLevel++;
+            EnemySpawnController.Upgrade();
+        }
     }
 
     public bool CanBeUpgraded()

@@ -462,8 +462,44 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 600
-      value: 2
+      time: 19.957518
+      value: 5.007223
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20.00215
+      value: 9.048956
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 35.07316
+      value: 4.9926205
+      inSlope: -0.8228749
+      outSlope: -0.8228749
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13202958
+    - serializedVersion: 3
+      time: 46.275627
+      value: 2.020652
+      inSlope: -0.005531391
+      outSlope: -0.005531391
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50.000004
+      value: 2.0000105
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -483,6 +519,18 @@ MonoBehaviour:
   - {fileID: 308696065}
   - {fileID: 308696064}
   - {fileID: 308696063}
+  WaveInfo1:
+    isActive: 1
+    health: 20
+    speed: 10
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
+    target: 0
+  WaveInfo2:
+    isActive: 1
+    health: 150
+    speed: 5
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
+    target: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

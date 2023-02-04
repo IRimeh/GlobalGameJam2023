@@ -31,6 +31,10 @@ public class EnemySpawn : MonoBehaviour
     {
         StartCoroutine(nameof(SpawnLoop));
     }
+    public void SetEnemyType(EnemyInfo info)
+    {
+        currentSpawningEnemy = info;
+    }
 
     IEnumerator SpawnLoop()
     {
