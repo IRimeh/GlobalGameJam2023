@@ -6,24 +6,63 @@ using NaughtyAttributes;
 public class PlayerStats : MonoBehaviour
 {
     // Base stats
+    [Header("Base Stats")]
     [SerializeField] private int baseDamage = 10;
+    public int BaseDamage { get { return baseDamage; } }
     [SerializeField] private int baseHealth = 100;
+    public int BaseHealth { get { return baseHealth; } }
     [SerializeField] private float baseFireRate = 0.3f;
+    public float BaseFireRate { get { return baseFireRate; } }
     [SerializeField] private float baseMovementSpeed = 15.0f;
+    public float BaseMovementSpeed { get { return baseMovementSpeed; } }
     [SerializeField] private float baseProjectileSpeed = 10.0f;
+    public float BaseProjectileSpeed { get { return baseProjectileSpeed; } }
     [SerializeField] private int baseProjectileAmount = 1;
+    public int BaseProjectileAmount { get { return baseProjectileAmount; } }
     [SerializeField] private float baseProjectileSize = 1.0f;
+    public float BaseProjectileSize { get { return baseProjectileSize; } }
     [SerializeField] private int baseProjectilePenetration = 0;
+    public int BaseProjectilePenetration { get { return baseProjectilePenetration; } }
+
+    // Ability stats
+    public DashStats DashStats = new DashStats();
+    public ThronsStats ThronsStats = new ThronsStats();
+    public GlaiveStats GlaiveStats = new GlaiveStats();
+    public ClusterBombStats ClusterBombStats = new ClusterBombStats();
 
     // Player Upgrades
-    [SerializeField][ReadOnly]
-    private List<PlayerUpgrade> playerUpgrades;
+    [Space(10)]
+    [SerializeReference][ReadOnly]
+    private List<PlayerUpgrade> playerUpgrades = new List<PlayerUpgrade>();
+
+    // Ability Upgrades
+    [Space(10)]
+    [SerializeReference][ReadOnly]
+    private List<AbilityUpgrade> abilityUpgrades = new List<AbilityUpgrade>();
+    
 
     private void Start()
     {
+        DashStats.Init();
+        ThronsStats.Init();
+        GlaiveStats.Init();
+        ClusterBombStats.Init();
+
         playerUpgrades = new List<PlayerUpgrade>()
         {
-            new DamageUpgrade(this)
+            new DamageUpgrade(this),
+            new HealthUpgrade(this),
+            new FireRateUpgrade(this),
+            new MovementSpeedUpgrade(this),
+            new ProjectileSpeedUpgrade(this),
+            new ProjectileAmountUpgrade(this),
+            new ProjectilePenetrationUpgrade(this),
+            new ProjectileSizeUpgrade(this)
+        };
+
+        abilityUpgrades = new List<AbilityUpgrade>()
+        {
+            new DashUpgrade(this)
         };
 
         Damage = baseDamage;
@@ -46,15 +85,11 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float ProjectileSize;
     [HideInInspector] public int ProjectilePenetration;
 
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade damage;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade health;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade fireRate;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade movementSpeed;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade projectileSpeed;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade projectileAmount;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade projectileSize;
-    // [Foldout("Player Upgrades")][ReadOnly] public Upgrade projectilePenetration;
-
+    [Button()]
+    private void TestButton()
+    {
+        abilityUpgrades[abilityUpgrades.Count - 1].ChooseUpgrade();
+    }
 
     // // Ability Upgrades
     // [Foldout("Ability Upgrades")][SerializeField][ReadOnly] private int dash;

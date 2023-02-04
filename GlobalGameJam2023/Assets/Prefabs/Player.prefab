@@ -246,6 +246,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53c5a600f7a158459a33ca7fb3de8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 10
+  baseHealth: 100
+  baseFireRate: 0.3
+  baseMovementSpeed: 15
+  baseProjectileSpeed: 10
+  baseProjectileAmount: 1
+  baseProjectileSize: 1
+  baseProjectilePenetration: 0
+  DashStats:
+    UpgradeLevel: 0
+    baseDistance: 10
+    baseCooldown: 10
+    baseCharges: 1
+  ThronsStats:
+    UpgradeLevel: 0
+    baseDamage: 0
+    baseCooldown: 0
+    shootingDirections: 0
+  GlaiveStats:
+    UpgradeLevel: 0
+    baseDamage: 0
+    baseSpeed: 0
+    baseSize: 0
+  ClusterBombStats:
+    UpgradeLevel: 0
+    baseDamage: 0
+    baseBombAmount: 0
+    baseSize: 0
+  playerUpgrades: []
+  abilityUpgrades: []
+  Damage: 0
+  Health: 0
+  FireRate: 0
+  MovementSpeed: 0
+  ProjectileSpeed: 0
+  ProjectileAmount: 0
+  ProjectileSize: 0
+  ProjectilePenetration: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8843271936141307235
 GameObject:
   m_ObjectHideFlags: 0

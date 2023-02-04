@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class AbilityUpgrade : MonoBehaviour
+[Serializable]
+public class AbilityUpgrade : Upgrade
 {
-    // Start is called before the first frame update
-    void Start()
+    internal List<string> levelDescriptions;
+    public List<string> LevelDescriptions { get { return levelDescriptions; } }
+
+    public AbilityUpgrade(string upgradeName, string upgradeDescription, int maxLevel, PlayerStats playerStats, List<string> _levelDescriptions) : base(upgradeName, upgradeDescription, maxLevel, playerStats)
     {
-        
+        levelDescriptions = _levelDescriptions;
     }
 
-    // Update is called once per frame
-    void Update()
+    public string GetCurrentLevelDescription()
     {
-        
+        return levelDescriptions[UpgradeLevel];
     }
 }

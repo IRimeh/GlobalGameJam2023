@@ -6,12 +6,14 @@ using System;
 [Serializable]
 public class DamageUpgrade : PlayerUpgrade
 {
-    public DamageUpgrade(PlayerStats playerStats) : base("Damage", "Increases the damage of all the palyers' projectiles", 5, playerStats)
+    public DamageUpgrade(PlayerStats playerStats) : base("Damage", "Increases the damage of all the players' projectiles", 5, playerStats)
     {
+        
     }
 
     public override void ChooseUpgrade()
     {
-        throw new NotImplementedException();
+        base.ChooseUpgrade();
+        playerStats.Damage = playerStats.BaseDamage + (2 * UpgradeLevel);
     }
 }

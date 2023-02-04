@@ -5,7 +5,7 @@ using System;
 using NaughtyAttributes;
 
 [Serializable]
-public abstract class Upgrade 
+public class Upgrade 
 {
     [SerializeField] private string _upgradeName;
     [SerializeField] private int _upgradeLevel;
@@ -25,9 +25,19 @@ public abstract class Upgrade
         UpgradeName = upgradeName;
         UpgradeDescription = upgradeDescription;
         UpgradeLevel = 0;
+        MaxLevel = maxLevel;
 
         playerStats = _playerStats;
     }
 
-    public abstract void ChooseUpgrade();
+    public virtual void ChooseUpgrade()
+    {
+        if(CanBeUpgraded())
+            UpgradeLevel++;
+    }
+
+    public bool CanBeUpgraded()
+    {
+        return UpgradeLevel < MaxLevel;
+    }
 }
