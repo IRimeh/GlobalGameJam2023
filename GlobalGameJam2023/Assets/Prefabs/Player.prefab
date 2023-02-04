@@ -259,21 +259,33 @@ MonoBehaviour:
     baseDistance: 10
     baseCooldown: 10
     baseCharges: 1
+    Distance: 0
+    Cooldown: 0
+    Charges: 0
   ThronsStats:
     UpgradeLevel: 0
-    baseDamage: 0
-    baseCooldown: 0
-    shootingDirections: 0
+    baseDamage: 20
+    baseCooldown: 15
+    baseShootingDirections: 5
+    Damage: 0
+    Cooldown: 0
+    ShootingDirections: 0
   GlaiveStats:
     UpgradeLevel: 0
     baseDamage: 0
     baseSpeed: 0
     baseSize: 0
+    Damage: 0
+    Speed: 0
+    Size: 0
   ClusterBombStats:
     UpgradeLevel: 0
     baseDamage: 0
     baseBombAmount: 0
     baseSize: 0
+    Damage: 0
+    BombAmount: 0
+    Size: 0
   playerUpgrades: []
   abilityUpgrades: []
   Damage: 0
