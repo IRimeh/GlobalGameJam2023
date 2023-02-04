@@ -8,6 +8,10 @@ public class CameraController : MonoBehaviour
     private Vector3 offsetFromPlayer;
     [SerializeField]
     private float followSpeed = 10.0f;
+    [SerializeField]
+    private Vector3 minBounds = new Vector3(-30, -30, -30);
+    [SerializeField]
+    private Vector3 maxBounds = new Vector3(30, 30, 30);
 
     private GameObject playerRef;
     private bool followingPlayer = false;
@@ -30,7 +34,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         FollowPlayer();
     }
@@ -39,7 +43,11 @@ public class CameraController : MonoBehaviour
     {
         if(followingPlayer)
         {
-            transform.position = Vector3.Lerp(transform.position, playerRef.transform.position + offsetFromPlayer, Time.deltaTime * followSpeed);
+            Vector3 playerPos = playerRef.transform.position;
+            playerPos = Vector3.Min(playerPos, maxBounds);
+            playerPos = Vector3.Max(playerPos, minBounds);
+
+            transform.position = Vector3.Lerp(transform.position, playerPos + offsetFromPlayer, Time.deltaTime * followSpeed);
         }
     }
 }

@@ -133,3 +133,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetFromPlayer: {x: 0, y: 15, z: -9.25}
   followSpeed: 10
+  minBounds: {x: -25, y: -25, z: -32.5}
+  maxBounds: {x: 25, y: 25, z: 30}
