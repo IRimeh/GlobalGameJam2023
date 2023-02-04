@@ -140,7 +140,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0
 --- !u!1 &4615155102410548977
@@ -244,7 +244,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.7
 --- !u!1 &4615155102472865015
@@ -348,7 +348,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.2
 --- !u!1 &4615155102683837556
@@ -452,7 +452,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.5
 --- !u!1 &4615155102693750661
@@ -556,7 +556,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.3
 --- !u!1 &4615155102945694326
@@ -660,7 +660,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.4
 --- !u!1 &4615155103251130607
@@ -764,7 +764,7 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.6
 --- !u!1 &4615155103300339249
@@ -868,6 +868,6 @@ MonoBehaviour:
     isActive: 0
     health: 20
     speed: 10
-    sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+    sprite: {fileID: 21300000, guid: 4157ac5444de2764ca28cf2e474b440d, type: 3}
     target: 0
   offset: 0.1

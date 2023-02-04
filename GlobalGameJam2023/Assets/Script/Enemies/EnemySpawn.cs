@@ -19,6 +19,10 @@ public class EnemySpawn : MonoBehaviour
 {
     [SerializeField]
     EnemyInfo currentSpawningEnemy;
+
+    [SerializeField]
+    private float maxSpawnOffset = 5.0f;
+
     public float offset = 0f;
 
     public static float spawnDelay = 2f;
@@ -42,7 +46,8 @@ public class EnemySpawn : MonoBehaviour
     {
         EnemyScript enemy = EnemySpawnController.GetEnemyDummy();
 
-        enemy.transform.position = this.transform.position;
+        Vector2 randomOffset = (Random.insideUnitCircle * maxSpawnOffset);
+        enemy.transform.position = this.transform.position + new Vector3(randomOffset.x, 0, randomOffset.y);
         enemy.SetEnemyInfo(currentSpawningEnemy);
     }
 }

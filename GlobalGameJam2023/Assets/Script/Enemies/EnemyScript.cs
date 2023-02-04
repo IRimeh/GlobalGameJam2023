@@ -13,12 +13,17 @@ public class EnemyScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public NavMeshAgent agent;
     
-    
+    private MaterialPropertyBlock propBlock;
+    private float offset = 0;
+    private float animationSpeed = 0.0f;
     
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         agent = GetComponent<NavMeshAgent>();
+        propBlock = new MaterialPropertyBlock();
+        offset = Random.Range(0.0f, 1.0f);
+        animationSpeed = spriteRenderer.material.GetFloat("_AnimationSpeed");
     }
 
     public void SetEnemyInfo(EnemyInfo info)
@@ -42,6 +47,9 @@ public class EnemyScript : MonoBehaviour
     public void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
+        spriteRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetFloat("_TimeOffset", offset);
+        spriteRenderer.SetPropertyBlock(propBlock);
     }
 
     public void SetTarget(TargetEnum nTarget)
@@ -57,11 +65,20 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private void FlipSpriteBasedOnPlayerPos()
+    {
+        bool flip = PlayerController.Position.x < transform.position.x;
+        spriteRenderer.flipX = flip;
+    }
+
     private IEnumerator DefaultAIBehaviour()
     {
         while (true)
         {
+            if( (Time.time * animationSpeed + offset) % 2.0f >= 1.0f)
             agent.velocity = (PlayerController.Position - transform.position).normalized * agent.speed;
+
+            FlipSpriteBasedOnPlayerPos();
 
             yield return null;//yield return new WaitForSeconds(0.1f);
         }
@@ -70,6 +87,7 @@ public class EnemyScript : MonoBehaviour
     {
         while (true)
         {
+            FlipSpriteBasedOnPlayerPos();
 
             //agent.destination = PlantPos;
             //when reach plant run away

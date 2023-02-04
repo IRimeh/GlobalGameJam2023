@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float MaxHealth = 20;
+    public bool ShowDamageNumber = false;
     public UnityEvent<float, float> OnTakeDamage;
     public UnityEvent OnDeath;
 
@@ -27,6 +28,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        DamageNumbersController.Instance.SpawnDamageNumber(transform.position, (int)damage);
+        
         if(currentHealth <= 0)
             Die();
         else
