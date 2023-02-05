@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public EnemySpawnController EnemyController;
     public Vector3 PlayerSpawnPos = new Vector3(-2, 1.5f, 0);
     public TextMeshProUGUI startingText;
+    public GameObject youDiedScreen;
+    public GameObject gameOverScreen;
 
 
     private GameObject player;
@@ -98,5 +100,10 @@ public class GameController : MonoBehaviour
         Instance.timeInSeconds = _timeInSeconds;
         Instance.timeElapsed = 0.0f;
         Instance.timeScaleBefore = Time.timeScale;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneLoader.Instance.LoadScene("StartScreen");
     }
 }

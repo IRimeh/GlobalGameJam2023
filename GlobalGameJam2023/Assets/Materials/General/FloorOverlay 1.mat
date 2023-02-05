@@ -46,7 +46,7 @@ Material:
     - _Fade: 0.2
     - _QueueControl: 0
     - _QueueOffset: -10
-    - _ShowPercentage: 1.0199995
+    - _ShowPercentage: 0.0006000001
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

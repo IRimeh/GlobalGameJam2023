@@ -72,7 +72,7 @@ public class Plant : MonoBehaviour
         propBlock = new MaterialPropertyBlock();
         defaultPickupPos = upgradePickup.transform.position;
         bloodToCollectText.text = bloodNeededToWin.ToString();
-        bloodToCollectText.transform.DOPunchScale(Vector3.one * 1.5f, 0.5f);
+        bloodToCollectText.transform.DOPunchScale(Vector3.one * 2.0f, 0.5f, 5, 0.3f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -295,6 +295,7 @@ public class Plant : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
 
             // Show "win" screen
+            GameController.Instance.gameOverScreen.SetActive(true);
         }
     }
 }
