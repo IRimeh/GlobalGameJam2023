@@ -267,7 +267,7 @@ public class Plant : MonoBehaviour
         plantSprite.gameObject.SetActive(false);
         daBaby = true;
         daBabyParticles.Play();
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/BabyWokeUp-001", transform.position);
         //Start root spawning
         rootSpawner.StartSpawningRoots();
 
