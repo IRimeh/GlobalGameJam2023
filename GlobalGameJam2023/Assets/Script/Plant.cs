@@ -70,6 +70,7 @@ public class Plant : MonoBehaviour
             playerBloodInv = bloodInv;
             if(bloodInv.GetBloodAmount() >= 0.1f)
             {
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Sucking", 1, false);
                 bloodSuckingParticles.Play();
                 var shape = bloodSuckingParticles.shape;
                 shape.position = PlayerController.Position - bloodSuckingParticles.transform.position;
@@ -81,6 +82,7 @@ public class Plant : MonoBehaviour
     {
         if(other.gameObject.layer == playerLayer)
         {
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Sucking", 0, false);
             bloodSuckingParticles.Stop();
         }
     }

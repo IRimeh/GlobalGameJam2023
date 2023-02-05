@@ -9,6 +9,7 @@ public class BloodInventory : MonoBehaviour
 
     public void AddBlood(float amount)
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/BloodPickup", transform.position);
         BloodAmount += amount;
     }
 
