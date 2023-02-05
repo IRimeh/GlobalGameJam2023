@@ -1,6 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5733429197435716724
+--- !u!114 &-8529524123715016527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sucking
+  m_EditorClassIdentifier: 
+  Name: Sucking
+  StudioPath: parameter:/Sucking
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2472152624
+    data2: 1272017683
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-7914430862545760591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,24 +34,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/kf025605-creeping-goliath
+  m_Name: event:/EnemyDie
   m_EditorClassIdentifier: 
-  Path: event:/kf025605-creeping-goliath
+  Path: event:/EnemyDie
   Guid:
-    Data1: -1419044459
-    Data2: 1120874806
-    Data3: -1591610731
-    Data4: 1086906480
+    Data1: 1792410597
+    Data2: 1104699541
+    Data3: 1489194156
+    Data4: -960324433
   Banks:
-  - {fileID: 5714363889171175413}
+  - {fileID: -6379409629896576538}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
+  MinDistance: 1
+  MaxDistance: 30
   Length: 0
---- !u!114 &-3008429602921302917
+--- !u!114 &-6400349210814350616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,17 +61,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.strings.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/Desktop/Master.strings.bank
-  Name: Desktop/Master.strings
+  Path: Assets/Audio/Banks/Desktop/Master.strings.bank
+  Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638112024525919505
+  lastModified: 638112078443295013
   FileSizes:
-  - Name: 
-    Value: 886
+  - Name: Desktop
+    Value: 1392
   Exists: 1
---- !u!114 &-2410937230420890316
+--- !u!114 &-6379409629896576538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/Banks/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638112078443225038
+  FileSizes:
+  - Name: Desktop
+    Value: 4033088
+  Exists: 1
+--- !u!114 &-5193851265030546190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,22 +101,155 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/kf014505-swelling-drums
+  m_Name: event:/BloodPickup
   m_EditorClassIdentifier: 
-  Path: event:/kf014505-swelling-drums
+  Path: event:/BloodPickup
+  Guid:
+    Data1: -758071341
+    Data2: 1175938079
+    Data3: 1764639140
+    Data4: -171154976
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3922557502706081065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Track1
+  m_EditorClassIdentifier: 
+  Path: event:/Track1
   Guid:
     Data1: -569689732
     Data2: 1334969918
     Data3: 627994504
     Data4: 1018212527
   Banks:
-  - {fileID: 5714363889171175413}
+  - {fileID: -6379409629896576538}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+  Length: 0
+--- !u!114 &-3757390376751347701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BloodDeliver/Sucking
+  m_EditorClassIdentifier: 
+  Name: Sucking
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2472152624
+    data2: 1272017683
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-2178352512813200674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PlayerHit
+  m_EditorClassIdentifier: 
+  Path: event:/PlayerHit
+  Guid:
+    Data1: 647821544
+    Data2: 1227385534
+    Data3: 1169612931
+    Data4: 337883715
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-452034893974883217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BloodDeliver
+  m_EditorClassIdentifier: 
+  Path: event:/BloodDeliver
+  Guid:
+    Data1: 446045033
+    Data2: 1223738428
+    Data3: -656648784
+    Data4: 975478243
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3757390376751347701}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-205985417072976881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Shoot
+  Guid:
+    Data1: 1064231702
+    Data2: 1203880299
+    Data3: -63172960
+    Data4: 283596400
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
   Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -87,20 +264,33 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -3008429602921302917}
-  - {fileID: 5714363889171175413}
+  - {fileID: -6400349210814350616}
+  - {fileID: -6379409629896576538}
   EditorEvents:
-  - {fileID: -2410937230420890316}
-  - {fileID: -5733429197435716724}
-  - {fileID: 2472806621142541978}
-  EditorParameters: []
+  - {fileID: -3922557502706081065}
+  - {fileID: 1411730242732894508}
+  - {fileID: 3798692667303703325}
+  - {fileID: -205985417072976881}
+  - {fileID: 3411073708801854176}
+  - {fileID: -452034893974883217}
+  - {fileID: 4652878974605564800}
+  - {fileID: -5193851265030546190}
+  - {fileID: -7914430862545760591}
+  - {fileID: -2178352512813200674}
+  - {fileID: 4757731401780596051}
+  - {fileID: 2855218626963896044}
+  - {fileID: 5946951765988500710}
+  - {fileID: 8894662029663328548}
+  - {fileID: 5529191316386174586}
+  EditorParameters:
+  - {fileID: -8529524123715016527}
   MasterBanks:
-  - {fileID: 5714363889171175413}
+  - {fileID: -6379409629896576538}
   StringsBanks:
-  - {fileID: -3008429602921302917}
-  cacheTime: 638112024525919505
+  - {fileID: -6400349210814350616}
+  cacheTime: 638112078443295013
   cacheVersion: 131601
---- !u!114 &2472806621142541978
+--- !u!114 &1411730242732894508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,16 +300,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/kf010118-through-blood
+  m_Name: event:/Track3
   m_EditorClassIdentifier: 
-  Path: event:/kf010118-through-blood
+  Path: event:/Track3
   Guid:
-    Data1: -1478973988
-    Data2: 1149052944
-    Data3: -594863208
-    Data4: -1605658026
+    Data1: -1419044459
+    Data2: 1120874806
+    Data3: -1591610731
+    Data4: 1086906480
   Banks:
-  - {fileID: 5714363889171175413}
+  - {fileID: -6379409629896576538}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -127,7 +317,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
---- !u!114 &5714363889171175413
+--- !u!114 &2855218626963896044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,12 +326,210 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Desktop/Master.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Track2
   m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/Desktop/Master.bank
-  Name: Desktop/Master
-  StudioPath: bank:/Master
-  lastModified: 638112024525889592
-  FileSizes: []
-  Exists: 1
+  Path: event:/Track2
+  Guid:
+    Data1: 1305681053
+    Data2: 1155217686
+    Data3: 274817954
+    Data4: -1067686891
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &3411073708801854176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/EnemyHit
+  m_EditorClassIdentifier: 
+  Path: event:/EnemyHit
+  Guid:
+    Data1: 1744539996
+    Data2: 1224750593
+    Data3: 384341395
+    Data4: 325653069
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 30
+  Length: 0
+--- !u!114 &3798692667303703325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Dash
+  Guid:
+    Data1: -1072777964
+    Data2: 1079575171
+    Data3: -698004559
+    Data4: -978440017
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &4652878974605564800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UIClick
+  m_EditorClassIdentifier: 
+  Path: event:/UIClick
+  Guid:
+    Data1: 1056304060
+    Data2: 1203836066
+    Data3: -885204339
+    Data4: -398403370
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &4757731401780596051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Glaive
+  m_EditorClassIdentifier: 
+  Path: event:/Glaive
+  Guid:
+    Data1: -1490735895
+    Data2: 1259471716
+    Data3: 1385991307
+    Data4: -643709633
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 40
+  Length: 0
+--- !u!114 &5529191316386174586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Upgrade
+  m_EditorClassIdentifier: 
+  Path: event:/Upgrade
+  Guid:
+    Data1: 692337795
+    Data2: 1297082971
+    Data3: -292784479
+    Data4: -1141133164
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &5946951765988500710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BabyWokeUp-002
+  m_EditorClassIdentifier: 
+  Path: event:/BabyWokeUp-002
+  Guid:
+    Data1: 2048871685
+    Data2: 1206716924
+    Data3: -370790736
+    Data4: -1965695824
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8894662029663328548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BabyWokeUp-001
+  m_EditorClassIdentifier: 
+  Path: event:/BabyWokeUp-001
+  Guid:
+    Data1: 1007741796
+    Data2: 1159246720
+    Data3: 1637945739
+    Data4: -1478549792
+  Banks:
+  - {fileID: -6379409629896576538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

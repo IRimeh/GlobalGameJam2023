@@ -54,10 +54,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyHit", transform.position);
+
         if(!CanTakeDamage)
             return;
 
         timeSinceLastTakenDamage = 0;
+
 
         currentHealth -= damage;
         if(currentHealth <= 0)
@@ -91,6 +95,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyDie", transform.position);
         OnDeath.Invoke();
 
         if(SpawnDeathParticles)

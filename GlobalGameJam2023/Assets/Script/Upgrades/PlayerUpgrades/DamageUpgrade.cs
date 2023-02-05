@@ -14,6 +14,6 @@ public class DamageUpgrade : PlayerUpgrade
     public override void ChooseUpgrade()
     {
         base.ChooseUpgrade();
-        playerStats.Damage = playerStats.BaseDamage + (2 * UpgradeLevel);
+        playerStats.Damage = playerStats.BaseDamage + (3 * UpgradeLevel);
     }
 }

@@ -41,6 +41,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot", transform.position);
         float totalAngle = angleInBetweenProjectiles * (playerStats.ProjectileAmount - 1);
         float halfTotalAngle = totalAngle * 0.5f;
         for (int i = 0; i < playerStats.ProjectileAmount; i++)

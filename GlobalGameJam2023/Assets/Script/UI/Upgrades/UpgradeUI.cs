@@ -25,6 +25,7 @@ public class UpgradeUI : MonoBehaviour
 
     private void OnEnable()
     {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Sucking", 0, false);
         blackBar.transform.localScale = new Vector3(1, 0, 1);
         blackBar.transform.DOScaleY(1.0f, 0.2f).SetUpdate(true);
 
@@ -55,6 +56,8 @@ public class UpgradeUI : MonoBehaviour
 
     public void HideUpgradeOptions()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Upgrade");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Sucking", 1, false);
         upgradeOption1.gameObject.SetActive(false);
         upgradeOption2.gameObject.SetActive(false);
         upgradeOption3.gameObject.SetActive(false);

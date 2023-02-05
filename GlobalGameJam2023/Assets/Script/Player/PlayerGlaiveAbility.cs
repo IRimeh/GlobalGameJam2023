@@ -50,6 +50,7 @@ public class PlayerGlaiveAbility: MonoBehaviour
 
     private void Shoot()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Glaive", transform.position);
         Vector3 direction = PlayerController.AimDirection;
         Vector3 offset = PlayerController.AimDirection + new Vector3(0, 1, 0);
         GameObject projectileObj = Instantiate(projectilePrefab, transform.position + offset, Quaternion.LookRotation(direction, Vector3.up), projectileParentTransform);

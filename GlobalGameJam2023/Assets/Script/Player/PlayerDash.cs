@@ -49,6 +49,7 @@ public class PlayerDash : MonoBehaviour
 
         if(currentCharges > 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Dash", transform.position);
             dashParticles.Play();
             Vector3 dir = PlayerController.AimDirection;
             rb.AddForce(dir * playerStats.DashStats.Distance * dashForce);
