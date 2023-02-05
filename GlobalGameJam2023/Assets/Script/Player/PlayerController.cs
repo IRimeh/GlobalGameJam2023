@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        
+        IsDead = true;
+        rb.velocity = Vector3.zero;
+        HUDCanvas.Instance.FadeOut(1.0f);
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject CameraPrefab;
     public EnemySpawnController EnemyController;
     public Vector3 PlayerSpawnPos = new Vector3(-2, 1.5f, 0);
+    public TextMeshProUGUI startingText;
 
 
     private GameObject player;
@@ -36,6 +39,11 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
+        StartCoroutine(StartGameSequence());
+    }
+
+    private IEnumerator StartGameSequence()
+    {
         player = Instantiate(PlayerPrefab, PlayerSpawnPos, Quaternion.identity);
         playerCamera = Instantiate(CameraPrefab);
         playerController = player.GetComponent<PlayerController>();
@@ -43,7 +51,14 @@ public class GameController : MonoBehaviour
 
         playerController.AssignCamera(playerCamera.GetComponent<Camera>());
         cameraController.StartFollowing(player);
+        PlayerController.IsDead = true;
+        startingText.transform.DOShakeScale(3.0f, 0.25f, 50);
+        HUDCanvas.Instance.FadeIn(1.0f);
 
+        yield return new WaitForSeconds(3.0f);
+
+        Destroy(startingText);
+        PlayerController.IsDead = false;
         EnemyController.StartGame();
     }
 

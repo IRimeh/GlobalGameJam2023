@@ -8,7 +8,18 @@ using TMPro;
 public class Plant : MonoBehaviour
 {
     [SerializeField]
+    private GameObject babySprite;
+    [SerializeField]
+    private GameObject plantSprite;
+    [SerializeField]
+    private EnemySpawnController enemySpawnController;
+    [SerializeField]
+    private BabyRootSpawner rootSpawner;
+    [SerializeField]
     private int bloodNeededToWin = 1000;
+    [SerializeField]
+    private float babyPhaseTimeInMinutes = 5.0f;
+
     [SerializeField]
     private float bloodNeededForLevel = 10.0f;
     [SerializeField]
@@ -49,10 +60,11 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI bloodToCollectText;
     [SerializeField]
-    private Renderer rootsOverlay;
+    private List<Renderer> groundOverlays;
 
     private BloodInventory playerBloodInv;
     private bool canShowPickup = true;
+    private bool daBaby = false;
 
     private void Awake()
     {
@@ -109,6 +121,9 @@ public class Plant : MonoBehaviour
 
     private void CollectBlood(float bloodAmount, GameObject playerObj)
     {
+        if(daBaby)
+            return;
+
         totalBloodCollected += bloodAmount;
         currentCollectedBlood += bloodAmount;
         SetBloodFillPercentage(currentCollectedBlood / bloodNeededForLevel);
@@ -116,7 +131,10 @@ public class Plant : MonoBehaviour
         bloodToCollectText.transform.DOKill();
         bloodToCollectText.transform.localScale = Vector3.one;
         bloodToCollectText.transform.DOShakeScale(0.05f, 0.25f);
-        rootsOverlay.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
+        foreach(Renderer renderer in groundOverlays)
+        {
+            renderer.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
+        }
 
         int upgradesUnlockedAfterCollectingBlood = 0;
         while(currentCollectedBlood > bloodNeededForLevel)
@@ -219,5 +237,51 @@ public class Plant : MonoBehaviour
     private void Update()
     {
         ResetUpgradePickup();
+
+        if(totalBloodCollected >= bloodNeededToWin && !daBaby)
+        {
+            GoIntoBabyMode();
+        }
+    }
+
+    private void GoIntoBabyMode()
+    {
+        babySprite.gameObject.SetActive(true);
+        plantSprite.gameObject.SetActive(false);
+        bloodToCollectText.gameObject.SetActive(false);
+        daBaby = true;
+
+        //Start root spawning
+        rootSpawner.StartSpawningRoots();
+
+        //Up dificulty?
+
+        StartCoroutine(WinGameSequence());
+    }
+
+    private IEnumerator WinGameSequence()
+    {
+        yield return new WaitForSeconds(60.0f * babyPhaseTimeInMinutes);
+
+        if(!PlayerController.IsDead)
+        {
+            enemySpawnController.StopSpawn();
+            List<EnemyScript> enemies = new List<EnemyScript>(GameObject.FindObjectsOfType<EnemyScript>());
+            enemies.ForEach(e => e.GetComponent<Health>().TakeDamage(1000.0f));
+            CameraShake.Instance.StartShake(0.3f);
+
+            yield return new WaitForSeconds(3.0f);
+            PlayerController.IsDead = true;
+
+            playerBloodInv.transform.DOMove(transform.position, 0.2f);
+            playerBloodInv.transform.DOScale(Vector3.zero, 0.2f);
+
+            yield return new WaitForSeconds(0.4f);
+
+            HUDCanvas.Instance.FadeOut();
+            yield return new WaitForSeconds(0.4f);
+
+            // Show "win" screen
+        }
     }
 }

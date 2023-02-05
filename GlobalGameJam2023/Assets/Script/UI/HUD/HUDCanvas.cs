@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class HUDCanvas : MonoBehaviour
 {
+    public Image Fade;
     public GameObject DashIcon, ThornsIcon, GlaiveIcon;
     public GameObject DashOverlay, ThornsOverlay, GlaiveOverlay;
     public GameObject DashKeyText, ThornsKeyText, GlaiveKeyText;
@@ -18,9 +21,13 @@ public class HUDCanvas : MonoBehaviour
         Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FadeIn(float timeToFadeIn = 0.2f)
     {
-        
+        Fade.DOColor(new Color(0,0,0, 0.0f), timeToFadeIn);
+    }
+
+    public void FadeOut(float timeToFadeOut = 0.4f)
+    {
+        Fade.DOColor(new Color(0,0,0, 1.0f), timeToFadeOut);
     }
 }

@@ -5160,6 +5160,8 @@ MonoBehaviour:
   DeathParticlesPrefab: {fileID: 1058103992}
   ShowDamageNumber: 0
   SpawnDeathParticles: 1
+  DamageTakeCooldown: 0.2
+  IsPlayer: 1
   OnHealthUpdated:
     m_PersistentCalls:
       m_Calls: []

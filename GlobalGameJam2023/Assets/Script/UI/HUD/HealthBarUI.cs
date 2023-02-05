@@ -15,9 +15,12 @@ public class HealthBarUI : MonoBehaviour
     private float currentPerc = 1.0f;
     private float maxHealth = 100;
 
+    public static HealthBarUI Instance;
+
     private void Start()
     {
         currentPerc = 1.0f;
+        Instance = this;
     }
 
     public void TakeDamage(float damageTaken, float currentHealth)
@@ -35,16 +38,17 @@ public class HealthBarUI : MonoBehaviour
         currentPerc = ratio;
     }
 
-    [Button]
-    public void TestTakeDamage()
-    {
-        TakeDamage(5.0f, maxHealth * currentPerc - 5.0f);
-    }
+    
+    // [Button]
+    // public void TestTakeDamage()
+    // {
+    //     TakeDamage(5.0f, maxHealth * currentPerc - 5.0f);
+    // }
 
-    [Button]
-    public void TestAddHealth()
-    {
-        float currentHealth = maxHealth * currentPerc;
-        AddHealth(currentHealth, maxHealth, currentHealth + 20.0f, maxHealth + 20.0f);
-    }
+    // [Button]
+    // public void TestAddHealth()
+    // {
+    //     float currentHealth = maxHealth * currentPerc;
+    //     AddHealth(currentHealth, maxHealth, currentHealth + 20.0f, maxHealth + 20.0f);
+    // }
 }

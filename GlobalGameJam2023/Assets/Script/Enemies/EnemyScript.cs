@@ -11,6 +11,8 @@ public class EnemyScript : MonoBehaviour
     private Health health;
     [SerializeField]
     private GameObject pickupPrefab;
+    [SerializeField]
+    private int playerLayer = 8;
     public EnemyInfo enemyInfo;
     public SpriteRenderer spriteRenderer;
     public NavMeshAgent agent;
@@ -18,6 +20,7 @@ public class EnemyScript : MonoBehaviour
     private MaterialPropertyBlock propBlock;
     private float offset = 0;
     private float animationSpeed = 0.0f;
+    private bool isMoving = false;
     
     private void Awake()
     {
@@ -77,14 +80,22 @@ public class EnemyScript : MonoBehaviour
     {
         while (true)
         {
-            if( (Time.time * animationSpeed + offset) % 2.0f >= 1.0f)
-            agent.velocity = (PlayerController.Position - transform.position).normalized * agent.speed;
+            if(PlayerController.IsDead)
+            {
+                agent.velocity = Vector3.zero;
+                yield break;
+            }
+
+            isMoving = (Time.time * animationSpeed + offset) % 2.0f >= 1.0f;
+            if(isMoving)
+                agent.velocity = (PlayerController.Position - transform.position).normalized * agent.speed;
 
             FlipSpriteBasedOnPlayerPos();
 
             yield return null;//yield return new WaitForSeconds(0.1f);
         }
     }
+
     private IEnumerator PlantTargetingAIBehaviour()
     {
         while (true)
@@ -103,5 +114,38 @@ public class EnemyScript : MonoBehaviour
     public void DropPickup()
     {
         Instantiate(pickupPrefab, transform.position, Quaternion.identity);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(!isMoving)
+            return;
+
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if(contact.otherCollider.gameObject.layer == playerLayer)
+            {
+                DealDamage(contact.otherCollider.gameObject);
+            }
+        }
+    }
+
+    public void OnCollisionStay(Collision collision)
+    {
+        if(!isMoving)
+            return;
+
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if(contact.otherCollider.gameObject.layer == playerLayer)
+            {
+                DealDamage(contact.otherCollider.gameObject);
+            }
+        }
+    }
+
+    private void DealDamage(GameObject player)
+    {
+        player.GetComponent<Health>().TakeDamage(20.0f);
     }
 }
