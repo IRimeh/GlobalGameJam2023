@@ -12,6 +12,8 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private GameObject plantSprite;
     [SerializeField]
+    private ParticleSystem daBabyParticles;
+    [SerializeField]
     private EnemySpawnController enemySpawnController;
     [SerializeField]
     private BabyRootSpawner rootSpawner;
@@ -262,6 +264,7 @@ public class Plant : MonoBehaviour
         babySprite.gameObject.SetActive(true);
         plantSprite.gameObject.SetActive(false);
         daBaby = true;
+        daBabyParticles.Play();
 
         //Start root spawning
         rootSpawner.StartSpawningRoots();
