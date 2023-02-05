@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BabyMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: bc6628b9e83826e44a9985558e0a6fa3,
+  m_Shader: {fileID: -6465566751694194690, guid: 89d78a7b6278574418fefcdb522d7dc8,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -39,10 +39,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AnimationSpeed: 4
+    - _DamageFlashTime: 0.5
+    - _HasDamageFlash: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DamageColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteSheetDimensions: {r: 3, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5282838558516693345
 MonoBehaviour:
