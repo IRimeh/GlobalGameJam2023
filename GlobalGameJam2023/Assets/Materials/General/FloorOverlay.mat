@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _GradientTex:
-        m_Texture: {fileID: 2800000, guid: 4dff476d6f55d1040858d3c150b0a3ae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ce611457cb1ece42866f3cb93514c84, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -46,7 +46,7 @@ Material:
     - _Fade: 0.2
     - _QueueControl: 0
     - _QueueOffset: -10
-    - _ShowPercentage: 0.015275576
+    - _ShowPercentage: 0.17416489
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

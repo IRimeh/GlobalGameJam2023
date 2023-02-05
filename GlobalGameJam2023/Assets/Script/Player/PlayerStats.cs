@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using System;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -41,10 +42,14 @@ public class PlayerStats : MonoBehaviour
     private List<AbilityUpgrade> abilityUpgrades = new List<AbilityUpgrade>();
 
     private List<Upgrade> allUpgrades;
+
+    private Health healthComponent;
     
 
     private void Start()
     {
+        healthComponent = GetComponent<Health>();
+        
         DashStats.Init();
         ThronsStats.Init();
         GlaiveStats.Init();
@@ -86,13 +91,22 @@ public class PlayerStats : MonoBehaviour
 
     // Current stats
     [HideInInspector] public int Damage;
-    [HideInInspector] public int Health;
     [HideInInspector] public float FireRate;
     [HideInInspector] public float MovementSpeed;
     [HideInInspector] public float ProjectileSpeed;
     [HideInInspector] public int ProjectileAmount;
     [HideInInspector] public float ProjectileSize;
     [HideInInspector] public int ProjectilePenetration;
+    private int _health;
+    public int Health
+    {
+        get{ return _health;}
+        set
+        { 
+            healthComponent.AddHealth(_health, value);
+            _health = value;  
+        }
+    }
 
     public List<Upgrade> GetAllUpgrades()
     {
@@ -109,7 +123,5 @@ public class PlayerStats : MonoBehaviour
         Debug.Log(upgrade.UpgradeName + " - " + upgrade.UpgradeDescription);
         upgrade.ChooseUpgrade();
         Debug.Log("Upgrade Level:" + upgrade.UpgradeLevel);
-
-        //abilityUpgrades[0].ChooseUpgrade();
     }
 }

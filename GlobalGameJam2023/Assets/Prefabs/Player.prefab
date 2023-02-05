@@ -4923,6 +4923,7 @@ GameObject:
   - component: {fileID: -6892976468837095208}
   - component: {fileID: 1481343810273433453}
   - component: {fileID: 7110483299977381348}
+  - component: {fileID: 7657184524381847022}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -5031,7 +5032,6 @@ MonoBehaviour:
   playerUpgrades: []
   abilityUpgrades: []
   Damage: 0
-  Health: 0
   FireRate: 0
   MovementSpeed: 0
   ProjectileSpeed: 0
@@ -5144,6 +5144,43 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5285768301066795460, guid: 061d806885c216940bb4886ba8428f84,
     type: 3}
   glaiveCooldown: 8
+--- !u!114 &7657184524381847022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819490991858608093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258af3d79f64fe8438ac1cda80dca212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 20
+  DeathParticlesPrefab: {fileID: 1058103992}
+  ShowDamageNumber: 0
+  SpawnDeathParticles: 1
+  OnHealthUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 472764164856449728}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8843271936141307235
 GameObject:
   m_ObjectHideFlags: 0

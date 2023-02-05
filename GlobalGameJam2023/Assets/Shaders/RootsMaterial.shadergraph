@@ -764,7 +764,7 @@
     "m_RefNameGeneratedByDisplayName": "ShowPercentage",
     "m_DefaultReferenceName": "_ShowPercentage",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_Precision": 0,

@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour
     
     private bool hasCamera = false;
     private Camera playerCamera;
+    private bool flipSprite = false;
 
     public static Vector3 Position = Vector3.zero;
     public static Vector3 AimDirection = Vector3.zero;
-    private bool flipSprite = false;
+    public static bool IsDead = false;
 
     public void AssignCamera(Camera camera)
     {
@@ -40,10 +41,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
-        RotateTowardsCursor();
-        Position = transform.position;
-        Animations();
+        if(!IsDead)
+        {
+            Movement();
+            RotateTowardsCursor();
+            Position = transform.position;
+            Animations();
+        }
+        else
+        {
+            spriteRenderer.sprite = idleSprite;
+            spriteRenderer.material = idleMaterial;
+        }
     }
 
     private void Movement()
@@ -115,5 +124,10 @@ public class PlayerController : MonoBehaviour
             rotateToCameraTransform.transform.rotation = Quaternion.Euler(0, rotateToCameraTransform.transform.rotation.eulerAngles.y, 0);
             AimDirection = rotateToCameraTransform.transform.forward;
         }
+    }
+
+    public void Die()
+    {
+        
     }
 }

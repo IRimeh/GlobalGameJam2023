@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     public GameObject DeathParticlesPrefab;
     public bool ShowDamageNumber = false;
     public bool SpawnDeathParticles = true;
+
+    public UnityEvent<float, float, float, float> OnHealthUpdated;
     public UnityEvent<float, float> OnTakeDamage;
     public UnityEvent OnDeath;
 
@@ -29,6 +31,15 @@ public class Health : MonoBehaviour
         MaxHealth = health;
         currentHealth = health;
         this.enabled = true;
+    }
+
+    public void AddHealth(int oldMaxHealth = 0, int newMaxHealth = 0)
+    {
+        int diff = newMaxHealth - oldMaxHealth;
+        OnHealthUpdated.Invoke(currentHealth, MaxHealth, currentHealth + diff, MaxHealth + diff);
+
+        MaxHealth += diff;
+        currentHealth += diff;
     }
 
     public void TakeDamage(float damage)

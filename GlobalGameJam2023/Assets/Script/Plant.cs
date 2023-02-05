@@ -193,7 +193,7 @@ public class Plant : MonoBehaviour
 
     private void ResetUpgradePickup()
     {
-        if(playerBloodInv != null && bloodNeededForLevel < currentCollectedBlood + playerBloodInv.GetBloodAmount())
+        if(canShowPickup && playerBloodInv != null && bloodNeededForLevel < currentCollectedBlood + playerBloodInv.GetBloodAmount())
         {
             upgradePickup.transform.position = defaultPickupPos;
             upgradePickup.transform.DOScale(Vector3.one, 0.3f);
@@ -203,6 +203,7 @@ public class Plant : MonoBehaviour
     private void AllowShowingOfPickup()
     {
         canShowPickup = true;
+        upgradePickup.transform.DOKill();
         upgradePickup.transform.localScale = Vector3.zero;
     }
 
