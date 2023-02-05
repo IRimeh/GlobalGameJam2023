@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyHit", transform.position);
+        
 
         if(!CanTakeDamage)
             return;
@@ -73,6 +73,11 @@ public class Health : MonoBehaviour
         {
             HealthBarUI.Instance.TakeDamage(damage, currentHealth);
             CameraShake.Instance.StartShake();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerHit", transform.position);
+        }
+        else
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyHit", transform.position);
         }
 
         // Damage number
