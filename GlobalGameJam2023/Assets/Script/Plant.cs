@@ -138,7 +138,7 @@ public class Plant : MonoBehaviour
         bloodToCollectText.transform.DOShakeScale(0.05f, 0.25f);
         foreach(Renderer renderer in groundOverlays)
         {
-            renderer.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
+            renderer.sharedMaterial.SetFloat("_ShowPercentage", (totalBloodCollected / (bloodNeededToWin * 0.75f)));
         }
 
         int upgradesUnlockedAfterCollectingBlood = 0;
