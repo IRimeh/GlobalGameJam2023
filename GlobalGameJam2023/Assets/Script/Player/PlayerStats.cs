@@ -66,8 +66,8 @@ public class PlayerStats : MonoBehaviour
         {
             new DashUpgrade(this),
             new ThronsUpgrade(this),
-            new GlaiveUpgrade(this),
-            new ClusterBombUpgrade(this)
+            new GlaiveUpgrade(this)
+            //new ClusterBombUpgrade(this)
         };
 
         allUpgrades = new List<Upgrade>();

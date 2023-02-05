@@ -21,6 +21,9 @@ public class PlayerDash : MonoBehaviour
     [ReadOnly]
     private int currentCharges = 1;
 
+    [SerializeField]
+    private ParticleSystem dashParticles;
+
     void Start()
     {
         dashTimer = 0;
@@ -46,9 +49,32 @@ public class PlayerDash : MonoBehaviour
 
         if(currentCharges > 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            dashParticles.Play();
             Vector3 dir = PlayerController.AimDirection;
             rb.AddForce(dir * playerStats.DashStats.Distance * dashForce);
             currentCharges--;
         }
+
+        UpdateIcon();
+    }
+
+
+    private void UpdateIcon()
+    {
+        HUDCanvas.Instance.DashIcon.gameObject.SetActive(playerStats.DashStats.IsAbilityUnlocked());
+        HUDCanvas.Instance.DashChargesText.gameObject.SetActive(playerStats.DashStats.UpgradeLevel > 5);
+        HUDCanvas.Instance.DashKeyText.gameObject.SetActive(currentCharges > 0);
+        HUDCanvas.Instance.DashChargesText.text = currentCharges.ToString();
+
+        int chargeThreshold = playerStats.DashStats.UpgradeLevel > 5 ? 2 : 1;
+        if(currentCharges < chargeThreshold)
+        {
+            HUDCanvas.Instance.DashOverlay.gameObject.SetActive(true);
+            float ratio = dashTimer / playerStats.DashStats.Cooldown;
+            Vector3 scale = HUDCanvas.Instance.DashOverlay.transform.localScale;
+            HUDCanvas.Instance.DashOverlay.transform.localScale = new Vector3(scale.x, 1.0f - ratio, scale.y);
+        }
+        else
+            HUDCanvas.Instance.DashOverlay.gameObject.SetActive(false);
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using DG.Tweening;
+using TMPro;
 
 public class Plant : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class Plant : MonoBehaviour
     private float currentCollectedBlood = 0;
     [SerializeField][ReadOnly]
     private float bloodTillNextUpgrade = 0;
-
+    [SerializeField][ReadOnly]
     private float totalBloodCollected = 0;
 
 
@@ -34,13 +36,27 @@ public class Plant : MonoBehaviour
     private ParticleSystem bloodSuckingParticles;
     [SerializeField]
     private SpriteRenderer bloodFillSprite;
+    [SerializeField]
+    private SpriteRenderer upgradePickup;
+    [SerializeField]
+    private float upgradePickupRotationSpeed = 180.0f;
+    private Vector3 defaultPickupPos;
 
     private bool isChoosingUpgrades = false;
     private MaterialPropertyBlock propBlock;
 
+    // Win condition stuff
+    [SerializeField]
+    private TextMeshProUGUI bloodToCollectText;
+    [SerializeField]
+    private Renderer rootsOverlay;
+
     private void Awake()
     {
         propBlock = new MaterialPropertyBlock();
+        defaultPickupPos = upgradePickup.transform.position;
+        bloodToCollectText.text = bloodNeededToWin.ToString();
+        bloodToCollectText.transform.DOPunchScale(Vector3.one * 1.5f, 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -70,10 +86,11 @@ public class Plant : MonoBehaviour
         if(other.gameObject.layer == playerLayer)
         {
             BloodInventory bloodInv = other.GetComponent<BloodInventory>();
-            if(bloodInv.GetBloodAmount() >= 0.1f)
+            float bloodSiphonAmount = Mathf.Max(0.1f, bloodInv.GetBloodAmount() * 0.01f);
+            if(bloodInv.GetBloodAmount() >= bloodSiphonAmount)
             {
                 if(!isChoosingUpgrades)
-                    CollectBlood(bloodInv.TakeBlood(0.1f), other.gameObject);
+                    CollectBlood(bloodInv.TakeBlood(bloodSiphonAmount), other.gameObject);
 
                 if(!bloodSuckingParticles.isPlaying)
                     bloodSuckingParticles.Play();
@@ -91,6 +108,11 @@ public class Plant : MonoBehaviour
         totalBloodCollected += bloodAmount;
         currentCollectedBlood += bloodAmount;
         SetBloodFillPercentage(currentCollectedBlood / bloodNeededForLevel);
+        bloodToCollectText.text = Mathf.RoundToInt(bloodNeededToWin - totalBloodCollected).ToString();
+        bloodToCollectText.transform.DOKill();
+        bloodToCollectText.transform.localScale = Vector3.one;
+        bloodToCollectText.transform.DOShakeScale(0.05f, 0.25f);
+        rootsOverlay.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
 
         int upgradesUnlockedAfterCollectingBlood = 0;
         while(currentCollectedBlood > bloodNeededForLevel)
@@ -107,7 +129,7 @@ public class Plant : MonoBehaviour
     {
         isChoosingUpgrades = true;
         GameController.SetTimeScale(0.0f, 0.4f);
-
+        
         bool hasChosenUpgrade = false;
         for(int i = 0; i < amountOfUpgrades; i++)
         {
@@ -116,6 +138,7 @@ public class Plant : MonoBehaviour
             PlayerStats playerStats = playerObj.GetComponent<PlayerStats>();
             
             (Upgrade, Upgrade, Upgrade) upgrades = GetRandomUpgrades(playerStats);
+            PickupUpgradeVisual();
             yield return new WaitForSecondsRealtime(0.3f);
             upgradeUI.ShowUpgradeOptions(upgrades.Item1, upgrades.Item2, upgrades.Item3, ChoseUpgrade);
 
@@ -162,5 +185,19 @@ public class Plant : MonoBehaviour
         bloodFillSprite.GetPropertyBlock(propBlock);
         propBlock.SetFloat("_FillPercentage", perc);
         bloodFillSprite.SetPropertyBlock(propBlock);
+    }
+
+    private void ResetUpgradePickup()
+    {
+        upgradePickup.transform.position = defaultPickupPos;
+        upgradePickup.transform.DOScale(Vector3.one, 0.3f);
+    }
+
+    private void PickupUpgradeVisual()
+    {
+        upgradePickup.transform.DOMove(PlayerController.Position, 0.2f);
+        upgradePickup.transform.DOScale(Vector3.zero, 0.2f);
+
+        Invoke("ResetUpgradePickup", 0.2f);
     }
 }

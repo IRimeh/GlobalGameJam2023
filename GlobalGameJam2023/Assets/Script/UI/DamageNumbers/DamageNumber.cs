@@ -8,7 +8,9 @@ public class DamageNumber : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI damageNumber;
     [SerializeField]
-    private float damageNumberLifeTime = 2.0f;
+    private float damageNumberLifeTimeMin = 0.65f;
+    [SerializeField]
+    private float damageNumberLifeTimeMax = 0.85f;
     [SerializeField]
     private Gradient colorGradient;
     [SerializeField]
@@ -20,13 +22,15 @@ public class DamageNumber : MonoBehaviour
 
     private Vector3 position;
     private float currentLifeTime = 0.0f;
+    private float lifeTime = 0.0f;
 
     public void InitDamageNumber(Vector3 pos, int damage)
     {
         position = pos + offset;
         transform.position = Camera.main.WorldToScreenPoint(position);
         damageNumber.text = damage.ToString();
-        currentLifeTime = damageNumberLifeTime;
+        currentLifeTime = damageNumberLifeTimeMin;
+        lifeTime = Random.Range(damageNumberLifeTimeMin, damageNumberLifeTimeMax);
 
         StartCoroutine(DamageNumberUpdate());
     }
@@ -35,7 +39,7 @@ public class DamageNumber : MonoBehaviour
     {
         while(currentLifeTime > 0)
         {
-            float ratio = 1.0f - (currentLifeTime / damageNumberLifeTime);
+            float ratio = 1.0f - (currentLifeTime / lifeTime);
             currentLifeTime -= Time.deltaTime;
             damageNumber.color = colorGradient.Evaluate(ratio);
             damageNumber.fontSize = baseFontScale * fontScale.Evaluate(ratio);

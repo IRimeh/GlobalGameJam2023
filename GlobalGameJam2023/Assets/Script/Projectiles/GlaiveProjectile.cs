@@ -37,7 +37,7 @@ public class GlaiveProjectile : Projectile
     private void ComeBack()
     {
         Vector3 dir = (PlayerController.Position - transform.position);
-        dir = (new Vector3(dir.x, 0, dir.y)).normalized;
+        dir = (new Vector3(dir.x, 0, dir.z)).normalized;
         rb.velocity = Vector3.Lerp(rb.velocity, dir * projectileSpeed, Time.deltaTime * turnSpeed);
 
         if(Vector3.Distance(PlayerController.Position, transform.position) < 3.0f)

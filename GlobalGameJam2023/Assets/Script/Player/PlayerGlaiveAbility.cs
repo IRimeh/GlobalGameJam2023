@@ -35,6 +35,7 @@ public class PlayerGlaiveAbility: MonoBehaviour
         if(timeSinceShot < glaiveCooldown)
         {
             timeSinceShot += Time.deltaTime;
+            UpdateIcon();
             return;
         }
 
@@ -43,6 +44,8 @@ public class PlayerGlaiveAbility: MonoBehaviour
             timeSinceShot = 0;
             Shoot();
         }
+
+        UpdateIcon();
     }
 
     private void Shoot()
@@ -52,5 +55,17 @@ public class PlayerGlaiveAbility: MonoBehaviour
         GameObject projectileObj = Instantiate(projectilePrefab, transform.position + offset, Quaternion.LookRotation(direction, Vector3.up), projectileParentTransform);
         Projectile projectile = projectileObj.GetComponent<Projectile>();
         projectile.InitProjectile(playerStats.GlaiveStats.Damage + playerStats.Damage, playerStats.GlaiveStats.Speed + playerStats.ProjectileSpeed, direction, 10000, playerStats.GlaiveStats.Size * playerStats.ProjectileSize);
+    }
+
+
+    private void UpdateIcon()
+    {
+        HUDCanvas.Instance.GlaiveIcon.gameObject.SetActive(playerStats.GlaiveStats.IsAbilityUnlocked());
+        HUDCanvas.Instance.GlaiveKeyText.gameObject.SetActive(timeSinceShot >= glaiveCooldown);
+        HUDCanvas.Instance.GlaiveOverlay.gameObject.SetActive(timeSinceShot < glaiveCooldown);
+
+        float ratio = timeSinceShot / glaiveCooldown;
+        Vector3 scale = HUDCanvas.Instance.GlaiveOverlay.transform.localScale;
+        HUDCanvas.Instance.GlaiveOverlay.transform.localScale = new Vector3(scale.x, 1.0f - ratio, scale.y);
     }
 }

@@ -32,6 +32,7 @@ public class PlayerThornsAbility: MonoBehaviour
         if(timeSinceShot < playerStats.ThronsStats.Cooldown)
         {
             timeSinceShot += Time.deltaTime;
+            UpdateIcon();
             return;
         }
 
@@ -40,6 +41,8 @@ public class PlayerThornsAbility: MonoBehaviour
             timeSinceShot = 0;
             StartCoroutine(Shoot());
         }
+
+        UpdateIcon();
     }
 
     private IEnumerator Shoot()
@@ -63,5 +66,16 @@ public class PlayerThornsAbility: MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void UpdateIcon()
+    {
+        HUDCanvas.Instance.ThornsIcon.gameObject.SetActive(playerStats.ThronsStats.IsAbilityUnlocked());
+        HUDCanvas.Instance.ThornsKeyText.gameObject.SetActive(timeSinceShot >= playerStats.ThronsStats.Cooldown);
+        HUDCanvas.Instance.ThornsOverlay.gameObject.SetActive(timeSinceShot < playerStats.ThronsStats.Cooldown);
+
+        float ratio = timeSinceShot / playerStats.ThronsStats.Cooldown;
+        Vector3 scale = HUDCanvas.Instance.ThornsOverlay.transform.localScale;
+        HUDCanvas.Instance.ThornsOverlay.transform.localScale = new Vector3(scale.x, 1.0f - ratio, scale.y);
     }
 }
