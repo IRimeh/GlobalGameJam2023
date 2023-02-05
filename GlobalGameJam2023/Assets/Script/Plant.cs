@@ -51,6 +51,9 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private Renderer rootsOverlay;
 
+    private BloodInventory playerBloodInv;
+    private bool canShowPickup = true;
+
     private void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -64,6 +67,7 @@ public class Plant : MonoBehaviour
         if(other.gameObject.layer == playerLayer)
         {
             BloodInventory bloodInv = other.GetComponent<BloodInventory>();
+            playerBloodInv = bloodInv;
             if(bloodInv.GetBloodAmount() >= 0.1f)
             {
                 bloodSuckingParticles.Play();
@@ -189,15 +193,30 @@ public class Plant : MonoBehaviour
 
     private void ResetUpgradePickup()
     {
-        upgradePickup.transform.position = defaultPickupPos;
-        upgradePickup.transform.DOScale(Vector3.one, 0.3f);
+        if(playerBloodInv != null && bloodNeededForLevel < currentCollectedBlood + playerBloodInv.GetBloodAmount())
+        {
+            upgradePickup.transform.position = defaultPickupPos;
+            upgradePickup.transform.DOScale(Vector3.one, 0.3f);
+        }
+    }
+
+    private void AllowShowingOfPickup()
+    {
+        canShowPickup = true;
+        upgradePickup.transform.localScale = Vector3.zero;
     }
 
     private void PickupUpgradeVisual()
     {
+        canShowPickup = false;
         upgradePickup.transform.DOMove(PlayerController.Position, 0.2f);
         upgradePickup.transform.DOScale(Vector3.zero, 0.2f);
 
-        Invoke("ResetUpgradePickup", 0.2f);
+        Invoke("AllowShowingOfPickup", 0.2f);
+    }
+
+    private void Update()
+    {
+        ResetUpgradePickup();
     }
 }
