@@ -88,6 +88,14 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
 
+    public void StopSpawn()
+    {
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            enemySpawners[i].StopSpawn();
+        }
+    }
+
     void SetEnemyType(int spawnerID, EnemyInfo info)
     {
             enemySpawners[spawnerID].SetEnemyType(info);

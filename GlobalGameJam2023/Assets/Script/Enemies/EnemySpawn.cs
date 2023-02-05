@@ -31,6 +31,12 @@ public class EnemySpawn : MonoBehaviour
     {
         StartCoroutine(nameof(SpawnLoop));
     }
+
+    public void StopSpawn()
+    {
+        StopAllCoroutines();
+    }
+
     public void SetEnemyType(EnemyInfo info)
     {
         currentSpawningEnemy = info;

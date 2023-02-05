@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     public GameObject DeathParticlesPrefab;
     public bool ShowDamageNumber = false;
     public bool SpawnDeathParticles = true;
+    public float DamageTakeCooldown = 0;
+    public bool IsPlayer = false;
 
     public UnityEvent<float, float, float, float> OnHealthUpdated;
     public UnityEvent<float, float> OnTakeDamage;
@@ -17,6 +19,12 @@ public class Health : MonoBehaviour
     private float currentHealth = 0;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propBlock;
+
+    private float timeSinceLastTakenDamage = 0;
+    private bool CanTakeDamage
+    {
+        get { return timeSinceLastTakenDamage >= DamageTakeCooldown; }
+    }
 
 
     private void Start()
@@ -37,6 +45,8 @@ public class Health : MonoBehaviour
     {
         int diff = newMaxHealth - oldMaxHealth;
         OnHealthUpdated.Invoke(currentHealth, MaxHealth, currentHealth + diff, MaxHealth + diff);
+        if(IsPlayer)
+            HealthBarUI.Instance.AddHealth(currentHealth, MaxHealth, currentHealth + diff, MaxHealth + diff);
 
         MaxHealth += diff;
         currentHealth += diff;
@@ -44,12 +54,26 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+
         FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyHit", transform.position);
+
+        if(!CanTakeDamage)
+            return;
+
+        timeSinceLastTakenDamage = 0;
+
+
         currentHealth -= damage;
         if(currentHealth <= 0)
             Die();
         else
             OnTakeDamage.Invoke(damage, currentHealth);
+
+        if(IsPlayer)
+        {
+            HealthBarUI.Instance.TakeDamage(damage, currentHealth);
+            CameraShake.Instance.StartShake();
+        }
 
         // Damage number
         DamageNumbersController.Instance.SpawnDamageNumber(transform.position, (int)damage);
@@ -61,6 +85,12 @@ public class Health : MonoBehaviour
             propBlock.SetFloat("_TakeDamageTime", Time.time);
             spriteRenderer.SetPropertyBlock(propBlock);
         }
+    }
+
+    private void Update()
+    {
+        if(timeSinceLastTakenDamage < DamageTakeCooldown)
+            timeSinceLastTakenDamage += Time.deltaTime;
     }
 
     private void Die()

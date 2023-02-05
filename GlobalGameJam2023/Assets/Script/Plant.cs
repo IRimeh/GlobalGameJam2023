@@ -8,7 +8,20 @@ using TMPro;
 public class Plant : MonoBehaviour
 {
     [SerializeField]
+    private GameObject babySprite;
+    [SerializeField]
+    private GameObject plantSprite;
+    [SerializeField]
+    private ParticleSystem daBabyParticles;
+    [SerializeField]
+    private EnemySpawnController enemySpawnController;
+    [SerializeField]
+    private BabyRootSpawner rootSpawner;
+    [SerializeField]
     private int bloodNeededToWin = 1000;
+    [SerializeField]
+    private float babyPhaseTimeInMinutes = 5.0f;
+
     [SerializeField]
     private float bloodNeededForLevel = 10.0f;
     [SerializeField]
@@ -49,17 +62,19 @@ public class Plant : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI bloodToCollectText;
     [SerializeField]
-    private Renderer rootsOverlay;
+    private List<Renderer> groundOverlays;
 
     private BloodInventory playerBloodInv;
     private bool canShowPickup = true;
+    private bool daBaby = false;
+    private float timeSinceInDaBabyPhase = 0.0f;
 
     private void Awake()
     {
         propBlock = new MaterialPropertyBlock();
         defaultPickupPos = upgradePickup.transform.position;
         bloodToCollectText.text = bloodNeededToWin.ToString();
-        bloodToCollectText.transform.DOPunchScale(Vector3.one * 1.5f, 0.5f);
+        bloodToCollectText.transform.DOPunchScale(Vector3.one * 2.0f, 0.5f, 5, 0.3f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,6 +126,9 @@ public class Plant : MonoBehaviour
 
     private void CollectBlood(float bloodAmount, GameObject playerObj)
     {
+        if(daBaby)
+            return;
+
         totalBloodCollected += bloodAmount;
         currentCollectedBlood += bloodAmount;
         SetBloodFillPercentage(currentCollectedBlood / bloodNeededForLevel);
@@ -118,7 +136,10 @@ public class Plant : MonoBehaviour
         bloodToCollectText.transform.DOKill();
         bloodToCollectText.transform.localScale = Vector3.one;
         bloodToCollectText.transform.DOShakeScale(0.05f, 0.25f);
-        rootsOverlay.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
+        foreach(Renderer renderer in groundOverlays)
+        {
+            renderer.sharedMaterial.SetFloat("_ShowPercentage", totalBloodCollected / bloodNeededToWin);
+        }
 
         int upgradesUnlockedAfterCollectingBlood = 0;
         while(currentCollectedBlood > bloodNeededForLevel)
@@ -221,5 +242,65 @@ public class Plant : MonoBehaviour
     private void Update()
     {
         ResetUpgradePickup();
+
+        if(totalBloodCollected >= bloodNeededToWin && !daBaby)
+        {
+            GoIntoBabyMode();
+        }
+
+        if(daBaby)
+        {
+            timeSinceInDaBabyPhase += Time.deltaTime;
+
+            float timeLeft = (babyPhaseTimeInMinutes * 60.0F) - timeSinceInDaBabyPhase;
+
+            string minutes = Mathf.Floor(timeLeft / 60).ToString("00");
+            string seconds = (timeLeft % 60).ToString("00");
+
+            bloodToCollectText.text = minutes + ":" + seconds;
+        }
+    }
+
+    private void GoIntoBabyMode()
+    {
+        babySprite.gameObject.SetActive(true);
+        plantSprite.gameObject.SetActive(false);
+        daBaby = true;
+        daBabyParticles.Play();
+
+        //Start root spawning
+        rootSpawner.StartSpawningRoots();
+
+        //Up dificulty?
+
+        StartCoroutine(WinGameSequence());
+    }
+
+    private IEnumerator WinGameSequence()
+    {
+        yield return new WaitForSeconds(60.0f * babyPhaseTimeInMinutes);
+
+        if(!PlayerController.IsDead)
+        {
+            bloodToCollectText.gameObject.SetActive(false);
+            enemySpawnController.StopSpawn();
+            List<EnemyScript> enemies = new List<EnemyScript>(GameObject.FindObjectsOfType<EnemyScript>());
+            enemies.ForEach(e => e.GetComponent<Health>().TakeDamage(1000.0f));
+            CameraShake.Instance.StartShake(0.3f);
+
+            yield return new WaitForSeconds(3.0f);
+            PlayerController.IsDead = true;
+
+            playerBloodInv.transform.DOMove(transform.position, 0.2f);
+            playerBloodInv.transform.DOScale(Vector3.zero, 0.2f);
+
+            yield return new WaitForSeconds(0.4f);
+
+            HUDCanvas.Instance.FadeOut();
+            yield return new WaitForSeconds(0.4f);
+
+            // Show "win" screen
+            GameController.Instance.gameOverScreen.SetActive(true);
+        }
     }
 }

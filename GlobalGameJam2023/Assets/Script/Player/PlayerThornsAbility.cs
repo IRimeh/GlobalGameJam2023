@@ -36,7 +36,7 @@ public class PlayerThornsAbility: MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1) && !PlayerController.IsDead)
         {
             timeSinceShot = 0;
             StartCoroutine(Shoot());

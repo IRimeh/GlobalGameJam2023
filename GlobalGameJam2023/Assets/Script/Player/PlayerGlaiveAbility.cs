@@ -39,7 +39,7 @@ public class PlayerGlaiveAbility: MonoBehaviour
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && !PlayerController.IsDead)
         {
             timeSinceShot = 0;
             Shoot();

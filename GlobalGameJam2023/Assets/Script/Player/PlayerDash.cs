@@ -32,7 +32,7 @@ public class PlayerDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!playerStats.DashStats.IsAbilityUnlocked())
+        if(!playerStats.DashStats.IsAbilityUnlocked() && !PlayerController.IsDead)
             return;
 
         if(currentCharges < playerStats.DashStats.Charges)

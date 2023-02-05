@@ -32,7 +32,7 @@ public class PlayerShooting : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && !PlayerController.IsDead)
         {
             timeSinceShot = 0;
             Shoot();

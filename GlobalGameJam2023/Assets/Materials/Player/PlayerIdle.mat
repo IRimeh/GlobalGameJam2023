@@ -54,7 +54,7 @@ Material:
     m_Floats:
     - _AnimationSpeed: 4
     - _DamageFlashTime: 0.15
-    - _HasDamageFlash: 0
+    - _HasDamageFlash: 1
     - _QueueControl: 1
     - _QueueOffset: 0
     m_Colors:
