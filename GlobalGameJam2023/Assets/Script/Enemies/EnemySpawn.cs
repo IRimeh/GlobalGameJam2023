@@ -48,6 +48,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Spawn()
     {
+        if ((PlayerController.Position - transform.position).magnitude < 30) return;
         EnemyScript enemy = EnemySpawnController.GetEnemyDummy();
 
         Vector2 randomOffset = (Random.insideUnitCircle * maxSpawnOffset);

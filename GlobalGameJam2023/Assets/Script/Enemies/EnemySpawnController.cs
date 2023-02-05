@@ -36,17 +36,34 @@ public class EnemySpawnController : MonoBehaviour
     IEnumerator Wave2()
     {
         yield return new WaitUntil(() => upgradeAmount >= 20);
-        SetEnemyType(WaveInfo2);
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            if (i % 2 == 0) 
+            { 
+                SetEnemyType(i, WaveInfo2);
+            }
+            else
+            {
+                SetEnemyType(i, WaveInfo1);
+            }
+
+        }
     }
     IEnumerator Wave3()
     {
         yield return new WaitUntil(() => upgradeAmount >= 30);
-        SetEnemyType(WaveInfo1);
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            SetEnemyType(i, WaveInfo1);
+        }
     }
     IEnumerator Wave4()
     {
         yield return new WaitUntil(() => upgradeAmount >= 50);
-        SetEnemyType(WaveInfo2);
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            SetEnemyType(i, WaveInfo2);
+        }
     }
 
     public void StartGame()
@@ -64,12 +81,9 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
 
-    void SetEnemyType(EnemyInfo info)
+    void SetEnemyType(int spawnerID, EnemyInfo info)
     {
-        for (int i = 0; i < enemySpawners.Length; i++)
-        {
-            enemySpawners[i].SetEnemyType(info);
-        }
+            enemySpawners[spawnerID].SetEnemyType(info);
     }
 
     public static EnemyScript GetEnemyDummy()
