@@ -65,6 +65,7 @@ public class Plant : MonoBehaviour
     private BloodInventory playerBloodInv;
     private bool canShowPickup = true;
     private bool daBaby = false;
+    private float timeSinceInDaBabyPhase = 0.0f;
 
     private void Awake()
     {
@@ -242,13 +243,24 @@ public class Plant : MonoBehaviour
         {
             GoIntoBabyMode();
         }
+
+        if(daBaby)
+        {
+            timeSinceInDaBabyPhase += Time.deltaTime;
+
+            float timeLeft = (babyPhaseTimeInMinutes * 60.0F) - timeSinceInDaBabyPhase;
+
+            string minutes = Mathf.Floor(timeLeft / 60).ToString("00");
+            string seconds = (timeLeft % 60).ToString("00");
+
+            bloodToCollectText.text = minutes + ":" + seconds;
+        }
     }
 
     private void GoIntoBabyMode()
     {
         babySprite.gameObject.SetActive(true);
         plantSprite.gameObject.SetActive(false);
-        bloodToCollectText.gameObject.SetActive(false);
         daBaby = true;
 
         //Start root spawning
@@ -265,6 +277,7 @@ public class Plant : MonoBehaviour
 
         if(!PlayerController.IsDead)
         {
+            bloodToCollectText.gameObject.SetActive(false);
             enemySpawnController.StopSpawn();
             List<EnemyScript> enemies = new List<EnemyScript>(GameObject.FindObjectsOfType<EnemyScript>());
             enemies.ForEach(e => e.GetComponent<Health>().TakeDamage(1000.0f));

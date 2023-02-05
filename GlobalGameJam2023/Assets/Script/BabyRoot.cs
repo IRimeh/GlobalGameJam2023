@@ -8,7 +8,7 @@ public class BabyRoot : MonoBehaviour
     [SerializeField]
     private int playerLayer = 8;
     [SerializeField]
-    private float damage = 20.0f;
+    private float damage = 40.0f;
     [SerializeField]
     private List<Collider> colliders;
 
