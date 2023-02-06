@@ -113,7 +113,14 @@ public class EnemyScript : MonoBehaviour
 
     public void DropPickup()
     {
-        Instantiate(pickupPrefab, transform.position, Quaternion.identity);
+        if(enemyInfo.health > 50.0f)
+        {
+            Instantiate(pickupPrefab, transform.position + new Vector3(-1, 0, -0.5f), Quaternion.identity);
+            Instantiate(pickupPrefab, transform.position + new Vector3(1, 0, -0.5f), Quaternion.identity);
+            Instantiate(pickupPrefab, transform.position + new Vector3(0, 0, 1.0f), Quaternion.identity);
+        }
+        else
+            Instantiate(pickupPrefab, transform.position, Quaternion.identity);
     }
 
     public void OnCollisionEnter(Collision collision)
