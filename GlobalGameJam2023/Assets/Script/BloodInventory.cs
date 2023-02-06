@@ -9,10 +9,10 @@ public class BloodInventory : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            AddBlood(100);
-        }
+        // if(Input.GetKeyDown(KeyCode.Y))
+        // {
+        //     AddBlood(100);
+        // }
     }
 
     public void AddBlood(float amount)
