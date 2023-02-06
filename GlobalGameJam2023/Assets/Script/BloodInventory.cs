@@ -7,6 +7,14 @@ public class BloodInventory : MonoBehaviour
     [SerializeField]
     private float BloodAmount = 0;
 
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            AddBlood(100);
+        }
+    }
+
     public void AddBlood(float amount)
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/BloodPickup", transform.position);

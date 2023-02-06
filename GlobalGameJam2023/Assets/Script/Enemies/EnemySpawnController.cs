@@ -43,7 +43,7 @@ public class EnemySpawnController : MonoBehaviour
 
     IEnumerator Wave2()
     {
-        yield return new WaitUntil(() => upgradeAmount >= 15);
+        yield return new WaitUntil(() => upgradeAmount >= 12);
         for (int i = 0; i < enemySpawners.Length; i++)
         {
             if (i % 2 == 0) 
@@ -59,10 +59,17 @@ public class EnemySpawnController : MonoBehaviour
     }
     IEnumerator Wave3()
     {
-        yield return new WaitUntil(() => upgradeAmount >= 25);
+        yield return new WaitUntil(() => upgradeAmount >= 20);
         for (int i = 0; i < enemySpawners.Length; i++)
         {
-            SetEnemyType(i, WaveInfo1);
+            if (i % 4 == 0) 
+            { 
+                SetEnemyType(i, WaveInfo2);
+            }
+            else
+            {
+                SetEnemyType(i, WaveInfo1);
+            }
         }
     }
     IEnumerator Wave4()
